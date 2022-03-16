@@ -1,0 +1,104 @@
+  /* ---- reset ---- */ 
+  canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container ---- */ 
+  #particles-js{ 
+      position:absolute; 
+      width: 100%; 
+      height: 1000px !important;
+      max-height: fit-content !important;
+      background-color: black; 
+      background-image: url("");
+      background-repeat: no-repeat; 
+      background-size: cover; 
+      background-position: 50% 50%;
+      padding: 0px !important;
+      margin: 0px !important;
+      overflow-x: hidden;
+   } 
+  /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; top: 48px; left: 0; width: 80px; display: none; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } 
+  .js-count-particles{ font-size: 1.1em; } 
+  #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } 
+  #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
+  .addVote{
+      background-color: green;
+      color:white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      position: fixed !important;
+      bottom: 10px;
+      right: 10px;
+      border: 0px;
+  }
+    .show2{
+        background-color: white;
+        box-shadow:  5px 5px 5px 5px rgba(110, 110, 110, 0.4);
+        padding: 1%;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .fill{
+        padding-top: 20px;
+    }
+    #image{
+        width: 100px;
+        height: 100px;
+    }
+  .panel{
+      margin: auto;
+      width: 40%;
+      box-shadow:  5px 5px 5px 5px rgba(110, 110, 110, 0.4);
+      padding: 2%;
+      background-color: white;
+      animation: animatezoom 0.6s;
+      position: absolute;
+      top: 20%;
+      left: 30%;
+    }
+    .close{
+        right: 0px !important;
+        border: 0px;
+        background-color: transparent;
+    }
+    
+    @keyframes animatezoom{
+        from{
+            transform: scale(0);
+        }
+        to{
+            transform: scale(1);
+        }
+    }
+  .reg{   
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      border: 0px;
+      border-radius: 5px;
+      padding: 5px 10px;
+  }
+  .ref{
+      text-align: center;
+      padding-top: 10px;
+  }
+  textarea{
+      padding: 2%;
+      width: 100%;
+  }
+  .image{
+      width: 150px;
+      height: 150px;
+      border: 1px solid lightgrey;
+      margin-bottom: 3px;
+  }
+  .parent{
+      position: relative;
+  }
+
+  @media(max-width:760px){
+      .panel{
+          width: 100%;
+          box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+      }
+  }
+ 
