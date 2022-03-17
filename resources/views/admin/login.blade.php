@@ -28,27 +28,27 @@
                 @endif  
                 <div>
                     <label for="">Email</label>
-                    <input type="text" name="email" value="{{old('email')}}" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
+                    <input type="text" name="email" value="{{old('emaill')}}" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="text" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="text" value="{{old('passwordd')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
 
                 <div>
-                    <input type="checked">
+                    <input type="checkbox">
                     <span>Remember me</span>
                 </div>
+                @csrf
                 <div class="logg">
                     <button type="submit">LOGIN</button>
                 </div>
-                @csrf
             </form>
         </div>
     </div>

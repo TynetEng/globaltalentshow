@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +30,27 @@ Route::prefix('admin')->group(function(){
         return view('admin.signup');
     });
 
-    Route::post('/signup', function () {
-        return "Hello";
+    Route::post('/signup', function (Request $request) {
+        $request->validate([
+            'email'=>"email|required|unique:users",
+            'fName'=>"required",
+            'lName'=>"required",
+            "password"=>"required",
+            "phone"=>"required|min:8|max:12"
+        ]);
+
+        $admin= Admin::create([
+            'first name'=> $request->fName,
+            'last name'=> $request->lName,
+            'email'=> $request->email,
+            'phone number'=> $request->phone,
+            'password'=>Hash::make($request->password),
+            'image'=>0
+        ]);
+        
+        Auth::loginUsingId($admin->id);
+        return redirect('admin/login');
+
     })->name('adminSignup');
 
 
@@ -37,8 +59,22 @@ Route::prefix('admin')->group(function(){
         return view('admin.login');
     });
 
-    Route::post('/login', function () {
-        return "Hello";
+    Route::post('/login', function (Request $request) {
+        $request->validate([
+            'email'=>"required",
+            'password'=>"required"
+        ]);
+
+        $token = Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
+    
+
+        if(!$token){
+            session()->flash('error', 'Invalid Login Details');
+            return redirect()->back();
+        }
+     
+        return redirect()->to('admin/dashboard');
+        
     })->name('adminLogin');
 
 

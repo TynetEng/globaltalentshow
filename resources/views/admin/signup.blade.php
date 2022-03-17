@@ -63,6 +63,7 @@
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
+                @csrf
                 <div class="logg">
                     <button type="submit">Register</button>
                 </div>
@@ -75,7 +76,6 @@
                         <span>Continue with Google</span>
                     </button>
                 </div>
-                @csrf
             </form>
 
             
