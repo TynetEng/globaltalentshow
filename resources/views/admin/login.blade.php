@@ -42,8 +42,8 @@
                 </div>
 
                 <div>
-                    <input type="checkbox">
-                    <span>Remember me</span>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
                 </div>
                 @csrf
                 <div class="logg">

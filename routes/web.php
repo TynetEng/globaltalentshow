@@ -60,21 +60,25 @@ Route::prefix('admin')->group(function(){
     });
 
     Route::post('/login', function (Request $request) {
-        $request->validate([
-            'email'=>"required",
-            'password'=>"required"
-        ]);
-
-        $token = Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
+        try {
+            $request->validate([
+                'email'=>"required",
+                'password'=>"required"
+            ]);
     
-
-        if(!$token){
-            session()->flash('error', 'Invalid Login Details');
-            return redirect()->back();
-        }
-     
-        return redirect()->to('admin/dashboard');
+            $token = Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
         
+    
+            if(!$token){
+                session()->flash('error', 'Invalid Login Details');
+                return redirect()->back();
+            }
+         
+            return redirect()->to('admin/dashboard');
+         
+        } catch (\Throwable $th) {
+            return "error";
+        }   
     })->name('adminLogin');
 
 
