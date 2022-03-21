@@ -40,10 +40,10 @@ Route::prefix('admin')->group(function(){
         ]);
 
         $admin= Admin::create([
-            'first name'=> $request->fName,
-            'last name'=> $request->lName,
+            'firstName'=> $request->fName,
+            'lastName'=> $request->lName,
             'email'=> $request->email,
-            'phone number'=> $request->phone,
+            'phoneNumber'=> $request->phone,
             'password'=>Hash::make($request->password),
             'image'=>0
         ]);
@@ -83,13 +83,43 @@ Route::prefix('admin')->group(function(){
     })->name('adminLogin');
 
     Route::get('/dashboard', function(){
-        $validate = auth()->guard('admin')->user()->id;
-        dd($validate);
+        $validateAdmin = auth()->guard('admin')->user()->id;
 
-        return view('admin.dashboard');
+        $a = auth()->guard('admin')->user()->firstName;
+        $b = auth()->guard('admin')->user()->lastName;
+        $first= substr($a,0,1);
+        $sec= substr($b,0,1);
+        $data = DB::table('admins')
+        ->where('id', $validateAdmin)
+        ->get();
+
+        return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
     
 });
+
+// VOTERS
+
+Route::prefix('voter')->group(function(){
+
+    // DASHBORAD
+    Route::get('/dashboard', function(){
+        
+        return view('voter.dashboard');
+    });
+});
+
+
+// CONTESTANT
+Route::prefix('contestant')->group(function(){
+
+    // DASHBORAD
+    Route::get('/dashboard', function(){
+        
+        return view('contestant.dashboard');
+    });
+});
+
 
 Route::get('/adminNav', function () {
     return view('include.adminNav');

@@ -57,7 +57,11 @@
                     <button type="submit">LOGIN</button>
                 </div>
             </form>
+            <div>
+                <p>Don't have an account? <span><a href="./signup">signup</a></span></p>
+            </div>
         </div>
+        
     </div>
 
     <style>

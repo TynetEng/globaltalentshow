@@ -39,6 +39,34 @@ nav{
     top: 0px;
     position: fixed !important;
     background-color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cir{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 5px inset red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+nav h4{
+    color: white;
+}
+.fillNav{
+    display: flex;
+    align-items: center !important;
+   justify-content: space-between;
+}
+.nameText{
+    color: white;
+    padding-top: 3%;
+    padding-left: 5px;
 }
 
 .toggle{

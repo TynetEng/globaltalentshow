@@ -18,12 +18,15 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        
-    </div>
+    
     <div class="container-fluid">
         <div>
-            <!-- particles.js container --> <div id="particles-js"></div> <!-- stats - count particles --> <div class="count-particles"> <span class="js-count-particles">--</span> particles </div> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+            <!-- particles.js container --> <div id="particles-js"></div> 
+            <!-- stats - count particles --> <div class="count-particles"> 
+                <span class="js-count-particles">--</span> particles </div> 
+                <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
+            <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+            <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
         </div>
 
         <div class="parent">
@@ -110,7 +113,28 @@
                 </aside>
 
                 <nav>
+                    <div>
+                        <h4>Admin</h4>
+                    </div>
                     <div></div>
+                    <div></div>
+                    <div></div>
+                    
+                    <div>
+                        @foreach ($data as $i)
+                            <div class="fillNav">
+                                <div class="cir">
+                                    <span>{{$first}}</span>
+                                    <span>{{$sec}}</span>
+                                </div>
+                                <p class="nameText">
+                                    <span>{{$i->firstName}}</span>
+                                    <span>{{$i->lastName}}</span>
+                                </p> 
+                            </div>                           
+                        @endforeach 
+                    </div>
+                    
                 </nav>
 
                 <div class="panel">

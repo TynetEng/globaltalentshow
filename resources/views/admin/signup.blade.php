@@ -80,7 +80,7 @@
 
             
             <div class="pat1">
-                <p>Already a user? <span><a href="admin/login">Login</a></span></p>
+                <p>Already a user? <span><a href="./login">Login</a></span></p>
             </div>
 
             <div class="pat2">

@@ -15,9 +15,9 @@ class Admins extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('first name');
-            $table->string('last name');
-            $table->string('phone number');
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->string('phoneNumber');
             $table->string('image');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -35,6 +35,6 @@ class Admins extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('admins');
     }
 }
