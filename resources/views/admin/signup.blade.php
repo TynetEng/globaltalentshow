@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="text" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="password" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror

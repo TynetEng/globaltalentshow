@@ -19,6 +19,7 @@ class Admin extends Authenticatable
         'lastName',
         'phoneNumber',
         'email',
+        'google_id',
         'password',
         'image',
     ];

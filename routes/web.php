@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function(){
             'image'=>0
         ]);
         
-        Auth::loginUsingId($admin->id);
+        Auth::guard('admin')->loginUsingId($admin->id);
         return redirect('admin/login');
 
     })->name('adminSignup');
