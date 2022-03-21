@@ -14,7 +14,7 @@
       margin: 0px !important;
       overflow-x: hidden;
    } 
-  /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; top: 48px; left: 0; width: 80px; display: none; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } 
+  /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; display: none; top: 48px; left: 0; width: 80px; display: none; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } 
   .js-count-particles{ font-size: 1.1em; } 
   #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } 
   #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
@@ -40,7 +40,7 @@
     .fill{
         padding-top: 20px;
     }
-    #image{
+    #imagg{
         width: 100px;
         height: 100px;
     }
@@ -60,7 +60,8 @@
         border: 0px;
         background-color: transparent;
     }
-    
+
+   
     @keyframes animatezoom{
         from{
             transform: scale(0);
@@ -94,6 +95,26 @@
   .parent{
       position: relative;
   }
+
+   /* BUTTON */
+   .change{
+       padding-top: 2%;
+   }
+    .view, .edit, .del{
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 2px 5px;
+    }
+    .view{
+        background-color: blue;
+    }
+    .edit{
+        background-color: green;
+    }
+    .del{
+        background-color: red;
+    }
 
   @media(max-width:760px){
       .panel{

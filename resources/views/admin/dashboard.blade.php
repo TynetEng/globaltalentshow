@@ -71,7 +71,7 @@
                         </a>
                     </div>
                     <div class="board">
-                        <a href="/contestants">
+                        <a href="./contestant">
                             <div>
                                 <i class="fa fa-users"></i>
                             </div>
@@ -140,10 +140,38 @@
                 <div class="panel">
                     <div class="board1">
                         <div class="row">
-                            <div class="col-sm-2 pad1"></div>
-                            <div class="col-sm-2 pad2"></div>
-                            <div class="col-sm-2 pad3"></div>
-                            <div class="col-sm-2 pad4"></div>
+                            <div class="col-sm-2 pad1">
+                                <div class="no">
+                                    Number of Contestants
+                                </div>
+                                <div class="data">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-2 pad2">
+                                <div class="no">
+                                    Total number of vote
+                                </div>
+                                <div class="data">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-2 pad3">
+                                <div class="no">
+                                    Contestants with highest rate of vote
+                                </div>
+                                <div class="data">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-2 pad4">
+                                <div class="no">
+                                    Total amount of votes paid receive
+                                </div>
+                                <div class="data">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="board2">

@@ -37,7 +37,12 @@
                                         <p>{{$i->information}}</p>
                                     </div>
                                     <div>
-                                        <img src="./storage/{{$i->image}}" id="image">
+                                        <img id="imagg">
+                                        <div class="change">
+                                            <button class="view">VIEW</button>
+                                            <button class="edit">EDIT</button>
+                                            <button class="del">DELETE</button>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -138,16 +143,22 @@
     <script>
 
 
-
-        console.log(@json($show));
+        let contestantImage = @json($show);
+        console.log(contestantImage);
         setTimeout(() => {
-            document.getElementById('image').src = `{{url('storage/${constImage[0].image}')}}`;
+            document.getElementById('imagg').src = `{{url('storage/${contestantImage[0].image}')}}`;
         }, 1000);
+
+
         document.querySelector('.panel').style.display = "none";
 
         let showBox=()=>{
             document.querySelector('.panel').style.display = "inherit";
         }
+
+        // function selectedImage(){
+        //     alert()
+        // }
 
         particlesJS("particles-js", {"particles":{"number"
         :{"value":80,"density":{"enable":false,"value_area":800}},"color":

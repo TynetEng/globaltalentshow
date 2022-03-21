@@ -132,10 +132,21 @@ img{
     padding-top: 65px;
 }
 
+.no{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+.data{
+
+}
+
 .pad1, .pad2, .pad3, .pad4{
     border-radius: 10px;
     height: 200px;
     width: 250px !important;
+    text-align: center;
+    padding-top: 3%;
     margin: 1%;
 }
 .pad1{

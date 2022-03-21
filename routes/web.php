@@ -45,7 +45,8 @@ Route::prefix('admin')->group(function(){
             'email'=> $request->email,
             'phoneNumber'=> $request->phone,
             'password'=>Hash::make($request->password),
-            'image'=>0
+            'image'=>0,
+            'google_id'=> ''
         ]);
         
         Auth::guard('admin')->loginUsingId($admin->id);
@@ -82,6 +83,7 @@ Route::prefix('admin')->group(function(){
         }   
     })->name('adminLogin');
 
+    // DASHBOARD
     Route::get('/dashboard', function(){
         $validateAdmin = auth()->guard('admin')->user()->id;
 
@@ -95,7 +97,45 @@ Route::prefix('admin')->group(function(){
 
         return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
+
+    // CONTESTANT
+    Route::get('/contestant', function(){
+        $cont = DB::table('contestantDetails')->get();
+        
+        return view('admin.contestant')->with(['show'=>$cont]);
+    });
+
+    Route::post('/contestants', function(Request $request) {
+        $request->validate([
+            'contName'=>"required",
+            'contInfo'=>"required",
+            'image'=>"required"
+        ]);
     
+        $image = $request->image;
+    
+        if($image !== null){
+            $gen = mt_rand(10000, 90000);
+            $ext = $request->image->extension();
+            $path= $gen . ".". $ext;
+            $show= $request->image->storeAs('image', $path);
+    
+            $details= DB::table('contestantDetails')->insert([
+                'name'=>$request->contName,
+                'information'=>$request->contInfo,
+                'image'=>$show
+            ]); 
+        }
+    
+        if($details){
+            return "Contestant details updated successfully";
+        }
+        else{
+            return "Error occurred";
+        }
+    
+        
+    })->name('contestants');
 });
 
 // VOTERS
@@ -151,47 +191,6 @@ Route::get('/voterLogin', function () {
 Route::get('/voterDash', function () {
     return view('voterDash');
 });
-
-
-
-Route::get('/contestants', function () {
-    
-    $cont = DB::table('contestants')->get();
-    
-    return view('contestants')->with(['show'=>$cont]);
-});
-
-Route::post('/contestants', function(Request $request) {
-    $request->validate([
-        'contName'=>"required",
-        'contInfo'=>"required",
-        'image'=>"required"
-    ]);
-
-    $image = $request->image;
-
-    if($image !== null){
-        $gen = mt_rand(10000, 90000);
-        $ext = $request->image->extension();
-        $path= $gen . ".". $ext;
-        $show= $request->image->storeAs('image', $path);
-
-        $details= DB::table('contestants')->insert([
-            'name'=>$request->contName,
-            'information'=>$request->contInfo,
-            'image'=>$show
-        ]); 
-    }
-
-    if($details){
-        return "Contestant details updated successfully";
-    }
-    else{
-        return "Error occurred";
-    }
-
-    
-})->name('contestants');
 
 Route::get('google',function(){
     return view('googleAuth');  
