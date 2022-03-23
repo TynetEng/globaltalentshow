@@ -52,7 +52,7 @@
                         <template x-if="show">
                             <div class="panel">
                                 <div class="inner">
-                                    <form action="{{route('contestants')}}" method="POST">
+                                    <form action="{{route('contestant')}}" method="POST">
                                         <div>
                                             <label for="">Contestant's Name</label>
                                             <input type="text" class="form-control" name="contName">
@@ -86,7 +86,7 @@
                                 <button class="close" onclick="exitForm()"><i class="fa fa-close"></i></button>
                             </div>
                             <div class="inner">
-                                <form action="{{route('contestants')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('contestant')}}" method="POST" enctype="multipart/form-data">
                                     @if($su=Session::get('error'))
                                         <div class="alert alert-danger  alert-dismissible fade show"  role="alert">
                                             <strong>{{$su}}</strong>

@@ -71,10 +71,10 @@
                     <span>OR</span>
                 </div>
                 <div class="google">
-                    <button>
+                    <a href="{{url('/auth/redirect')}}">
                         <span><i class="fa fa-google"></i></span>
                         <span>Continue with Google</span>
-                    </button>
+                    </a>
                 </div>
             </form>
 
@@ -126,12 +126,13 @@
         .google{
             text-align: center
         }
-        .google button{
+        .google a{
             background-color: black;
             color: white;
             border: 0px;
             border-radius: 5px;
-            padding: 5px 10px;
+            padding: 10px 15px;
+            text-decoration: none;
         }
         .pat1{
             text-align: center;

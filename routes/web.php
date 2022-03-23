@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,6 @@ Route::prefix('admin')->group(function(){
             'phoneNumber'=> $request->phone,
             'password'=>Hash::make($request->password),
             'image'=>0,
-            'google_id'=> ''
         ]);
         
         Auth::guard('admin')->loginUsingId($admin->id);
@@ -105,7 +105,7 @@ Route::prefix('admin')->group(function(){
         return view('admin.contestant')->with(['show'=>$cont]);
     });
 
-    Route::post('/contestants', function(Request $request) {
+    Route::post('/contestant', function(Request $request) {
         $request->validate([
             'contName'=>"required",
             'contInfo'=>"required",
@@ -119,12 +119,18 @@ Route::prefix('admin')->group(function(){
             $ext = $request->image->extension();
             $path= $gen . ".". $ext;
             $show= $request->image->storeAs('image', $path);
+
+            // $fill= Storage::disk("public")->get();
+            // dd($fill);
     
             $details= DB::table('contestantDetails')->insert([
                 'name'=>$request->contName,
                 'information'=>$request->contInfo,
                 'image'=>$show
             ]); 
+
+            
+            
         }
     
         if($details){
@@ -135,7 +141,7 @@ Route::prefix('admin')->group(function(){
         }
     
         
-    })->name('contestants');
+    })->name('contestant');
 });
 
 // VOTERS
@@ -196,6 +202,9 @@ Route::get('google',function(){
     return view('googleAuth');  
 });
 
-Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
-Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+// Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
+// Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
+Route::get('auth/redirect', 'App\Http\Controllers\SocialController@redirect');
+Route::get('auth/callback', 'App\Http\Controllers\SocialController@callback');
 
