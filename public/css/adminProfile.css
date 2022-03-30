@@ -1,0 +1,9 @@
+/* MAIN */
+
+.panel{
+    z-index: 100;
+    margin-left: 18%;
+    padding-top: 75px;
+    position: relative;
+}
+ 

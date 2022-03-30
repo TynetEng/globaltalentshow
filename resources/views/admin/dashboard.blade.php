@@ -18,197 +18,54 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <div class="container-fluid">
-        <div>
-            <!-- particles.js container --> <div id="particles-js"></div> 
-            <!-- stats - count particles --> <div class="count-particles"> 
-                <span class="js-count-particles">--</span> particles </div> 
-                <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
-            <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
-            <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
-        </div>
+    <div>
+        @include('include.adminNav')
+    </div>
 
-        <div class="parent">
-            <div class="fill">
-                <aside>
-                    <div class="clip">
-                        <img src="./image/Global Talent white.png" alt="">
-                    </div>
-                    <div>
-                        <button class="dew" onclick="toggleBar()"> 
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-delicious"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Dashboard</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-user-circle-o"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Profile</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-bell"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Notification</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="./contestant">
-                            <div>
-                                <i class="fa fa-users"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Contestants</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-search"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Search</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-cog"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Settings</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-sign-out"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Logout</span>
-                            </div>
-                        </a>
-                    </div>
-                </aside>
-
-                <nav>
-                    <div>
-                        <h4>Admin</h4>
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    
-                    <div>
-                        @foreach ($data as $i)
-                            <div class="fillNav">
-                                <div class="cir">
-                                    <span>{{$first}}</span>
-                                    <span>{{$sec}}</span>
-                                </div>
-                                <p class="nameText">
-                                    <span>{{$i->firstName}}</span>
-                                    <span>{{$i->lastName}}</span>
-                                </p> 
-                            </div>                           
-                        @endforeach 
-                    </div>
-                    
-                </nav>
-
-                <div class="panel">
-                    <div class="board1">
-                        <div class="row">
-                            <div class="col-sm-2 pad1">
-                                <div class="no">
-                                    Number of Contestants
-                                </div>
-                                <div class="data">
-
-                                </div>
-                            </div>
-                            <div class="col-sm-2 pad2">
-                                <div class="no">
-                                    Total number of vote
-                                </div>
-                                <div class="data">
-
-                                </div>
-                            </div>
-                            <div class="col-sm-2 pad3">
-                                <div class="no">
-                                    Contestants with highest rate of vote
-                                </div>
-                                <div class="data">
-                                    
-                                </div>
-                            </div>
-                            <div class="col-sm-2 pad4">
-                                <div class="no">
-                                    Total amount of votes paid receive
-                                </div>
-                                <div class="data">
-                                    
-                                </div>
-                            </div>
+    <div>
+        <div class="panel">
+            <div class="board1">
+                <div class="row">
+                    <div class="col-sm-2 pad1">
+                        <div class="data">
+                            0
+                        </div>
+                        <div class="no">
+                            Total Contestants
                         </div>
                     </div>
-                    <div class="board2">
-
+                    <div class="col-sm-2 pad2">
+                        <div class="data">
+                            0
+                        </div>
+                        <div class="no">
+                            Total votes
+                        </div>
+                    </div>
+                    <div class="col-sm-2 pad3">
+                        <div class="data">
+                            0
+                        </div>
+                        <div class="no">
+                            Highest Votes
+                        </div>
+                    </div>
+                    <div class="col-sm-2 pad4">
+                        <div class="data">
+                            0
+                        </div>
+                        <div class="no">
+                            Total payments receive
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="board2">
+
+            </div>
         </div>
     </div>
+    
 
-    <script>
-        particlesJS("particles-js", {"particles":{"number"
-        :{"value":80,"density":{"enable":false,"value_area":800}},"color":
-        {"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},
-        "polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},
-        "opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},
-        "size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},
-        "line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},
-        "move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,
-        "out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},
-        "interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},
-        "onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,
-        "line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,
-        "speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":
-        {"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats =
-         new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute';
-          stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px';
-           document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); 
-           update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].
-           pJS.particles && window.pJSDom[0].pJS.particles.array) 
-           { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; }
-            requestAnimationFrame(update); }; requestAnimationFrame(update);;
-        
-
-        function toggleBar(){
-            document.querySelector('.exp').classList.toggle('.toogle');
-        }
-    </script>
 </body>
 </html>

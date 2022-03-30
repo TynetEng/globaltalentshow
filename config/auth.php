@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'voter' => [
+            'driver' => 'session',
+            'provider' => 'voters',
+        ],
     ],
 
     /*
@@ -73,6 +77,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+        'voters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Voter::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -98,6 +106,18 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'voters' => [
+            'provider' => 'voters',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

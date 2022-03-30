@@ -19,9 +19,9 @@
                 </a>
             </div>
             <div>
-                <h4> Admin Signup</h4>
+                <h4> Voter Signup</h4>
             </div>
-            <form action="{{route('adminSignup')}}" method="post">
+            <form action="{{route('voterSignup')}}" method="post">
                 @if($su=Session::get('error'))
                     <div class="alert alert-danger">
                         <strong>{{$su}}</strong>

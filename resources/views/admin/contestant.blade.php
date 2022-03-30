@@ -25,16 +25,21 @@
             <!-- particles.js container --> <div id="particles-js"></div> <!-- stats - count particles --> <div class="count-particles"> <span class="js-count-particles">--</span> particles </div> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
         </div>
         <div class="container">
-            <div class="parent">
+            <div class="panell">
                 
                 <div>
-                    <div>
+                    <div class="fillGroup">
                         <div class="fill">
                             @foreach ($show as $i)
                                 <div class="show2">
                                     <div>
-                                        <h4>{{$i->name}}</h4>
-                                        <p>{{$i->information}}</p>
+                                        <div>
+                                            <h4>{{$i->name}}</h4>
+                                            <p>{{$i->information}}</p>
+                                        </div>
+                                        <div>
+                                            <h6>Number of vote: <span></span></h6>
+                                        </div>
                                     </div>
                                     <div>
                                         <img id="imagg">

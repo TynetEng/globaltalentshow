@@ -36,7 +36,7 @@
                             </a>
     
                             <button class="navbar-toggler bell"  id="openSideBar">
-                                <i class="fa fa-bars" style="color: black"></i>
+                                <p class="nabar-toggler-icon"></p>
                             </button>
                         </div>
                         <div>
@@ -46,21 +46,33 @@
                                         <i class="fa fa-search"></i>
                                     </div>
                                     <li class="nav-items">
-                                        <a href="/voter/dashboard" class="nav-link">
+                                        <a href="/admin" class="nav-link">
                                             <span></span>
-                                            <span>DASHBOARD</span>
+                                            <span>Home</span>
                                         </a>
                                     </li>
                                     <li class="nav-items">
-                                        <a href="/voter/login" class="nav-link">
+                                        <a href="/admin/about" class="nav-link">
                                             <span></span>
-                                            <span>LOGIN</span>
+                                            <span>About</span>
                                         </a>
                                     </li>
                                     <li class="nav-items">
-                                        <a href="/voter/logout" class="nav-link">
+                                        <a href="/admin/dashboard" class="nav-link">
                                             <span></span>
-                                            <span>LOGOUT</span>
+                                            <span>Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-items">
+                                        <a href="/admin/login" class="nav-link">
+                                            <span></span>
+                                            <span>Login</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-items">
+                                        <a href="/vote" class="nav-link">
+                                            <span></span>
+                                            <span>Logout</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -69,22 +81,37 @@
                     </div>
                     <div class="sideBar">
                         <ul class="navbar-nav">
+                            <div>
+                                <i class="fa fa-search"></i>
+                            </div>
                             <li class="nav-items">
-                                <a href="/voter/dashboard" class="nav-link">
+                                <a href="/admin" class="nav-link">
                                     <span></span>
-                                    <span>DASHBOARD</span>
+                                    <span>Home</span>
                                 </a>
                             </li>
                             <li class="nav-items">
-                                <a href="/voter/login" class="nav-link">
+                                <a href="/admin/about" class="nav-link">
                                     <span></span>
-                                    <span>LOGIN</span>
+                                    <span>About</span>
                                 </a>
                             </li>
                             <li class="nav-items">
-                                <a href="/voter/logout" class="nav-link">
+                                <a href="/admin/dashboard" class="nav-link">
                                     <span></span>
-                                    <span>LOGOUT</span>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-items">
+                                <a href="/admin/login" class="nav-link">
+                                    <span></span>
+                                    <span>Login</span>
+                                </a>
+                            </li>
+                            <li class="nav-items">
+                                <a href="/vote" class="nav-link">
+                                    <span></span>
+                                    <span>Logout</span>
                                 </a>
                             </li>
                         </ul>
@@ -115,12 +142,13 @@
     }
     nav{
         width: 100%;
-        top: -10% !important;
+        top: 0 !important;
         margin: 0;
         z-index: 100;
-        border-bottom: 3px solid #5F0F40;
+        
         align-items: center;
-        background-color: white;
+        position: fixed;
+        
     }
     
     .show a{
@@ -154,7 +182,7 @@
         justify-content: space-between !important;
     }
     img{
-        width: 70%;    
+        width: 70% !important;    
     }
     .tin2{
         font-weight: bold;
@@ -181,9 +209,7 @@
             overflow-y: scroll;
         }
         .sideBar a{
-            color: black;
-            font-weight: bold;
-            font-size: 17px;
+            color: teal;
         }
         .left{
             display: flex;

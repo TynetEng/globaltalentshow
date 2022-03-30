@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayPalController;
 use App\Models\Admin;
+use App\Models\Voter;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -40,17 +42,21 @@ Route::prefix('admin')->group(function(){
             "phone"=>"required|min:8|max:12"
         ]);
 
-        $admin= Admin::create([
-            'firstName'=> $request->fName,
-            'lastName'=> $request->lName,
-            'email'=> $request->email,
-            'phoneNumber'=> $request->phone,
-            'password'=>Hash::make($request->password),
-            'image'=>0,
-        ]);
-        
-        Auth::guard('admin')->loginUsingId($admin->id);
-        return redirect('admin/login');
+        try {
+            $admin= Admin::create([
+                'firstName'=> $request->fName,
+                'lastName'=> $request->lName,
+                'email'=> $request->email,
+                'phoneNumber'=> $request->phone,
+                'password'=>Hash::make($request->password),
+                'image'=>0,
+            ]);
+            
+            Auth::guard('admin')->loginUsingId($admin->id);
+            return redirect('admin/login');
+        } catch (\Throwable $th) {
+            return "error";
+        }
 
     })->name('adminSignup');
 
@@ -61,25 +67,23 @@ Route::prefix('admin')->group(function(){
     });
 
     Route::post('/login', function (Request $request) {
+        $request->validate([
+            'email'=>"required|email",
+            'password'=>"required"
+        ]);
+
         try {
-            $request->validate([
-                'email'=>"required",
-                'password'=>"required"
-            ]);
-    
             $token = Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
-            
-        
-    
-            if(!$token){
-                session()->flash('error', 'Invalid Login Details');
-                return redirect()->back();
-            }
+            // if(!$token){
+            //     session()->flash('error', 'Invalid Login Details');
+            //     return redirect()->back();
+            // }
             $admin = auth()->guard('admin')->user();
             return redirect()->to('admin/dashboard');
          
         } catch (\Throwable $th) {
-            return "error";
+            session()->flash('error', 'Invalid Login Details');
+            return redirect()->back();
         }   
     })->name('adminLogin');
 
@@ -102,7 +106,17 @@ Route::prefix('admin')->group(function(){
     Route::get('/contestant', function(){
         $cont = DB::table('contestantDetails')->get();
         
-        return view('admin.contestant')->with(['show'=>$cont]);
+        $validateAdmin = auth()->guard('admin')->user()->id;
+
+        $a = auth()->guard('admin')->user()->firstName;
+        $b = auth()->guard('admin')->user()->lastName;
+        $first= substr($a,0,1);
+        $sec= substr($b,0,1);
+        $data = DB::table('admins')
+        ->where('id', $validateAdmin)
+        ->get();
+
+        return view('admin.contestant')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec, 'show'=>$cont]);
     });
 
     Route::post('/contestant', function(Request $request) {
@@ -127,32 +141,126 @@ Route::prefix('admin')->group(function(){
                 'name'=>$request->contName,
                 'information'=>$request->contInfo,
                 'image'=>$show
-            ]); 
-
-            
-            
+            ]);    
         }
-    
         if($details){
             return "Contestant details updated successfully";
         }
         else{
             return "Error occurred";
-        }
-    
-        
+        }   
     })->name('contestant');
+
+    // PROFILE
+
+    Route::get('/profile', function(){
+        $validateAdmin = auth()->guard('admin')->user()->id;
+
+        $a = auth()->guard('admin')->user()->firstName;
+        $b = auth()->guard('admin')->user()->lastName;
+        $first= substr($a,0,1);
+        $sec= substr($b,0,1);
+        $data = DB::table('admins')
+        ->where('id', $validateAdmin)
+        ->get();
+
+        return view('admin.profile')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
+    });
+
+    Route::get('/adminNav', function(){
+        $validateAdmin = auth()->guard('admin')->user()->id;
+
+        $a = auth()->guard('admin')->user()->firstName;
+        $b = auth()->guard('admin')->user()->lastName;
+        $first= substr($a,0,1);
+        $sec= substr($b,0,1);
+        $data = DB::table('admins')
+        ->where('id', $validateAdmin)
+        ->get();
+
+        return view('include.adminNav')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
+    });
 });
 
 // VOTERS
 
 Route::prefix('voter')->group(function(){
-
-    // DASHBORAD
-    Route::get('/dashboard', function(){
-        
-        return view('voter.dashboard');
+    // SIGNUP
+    Route::get('/signup', function () {
+        return view('voter.signup');
     });
+
+    Route::post('/signup', function (Request $request) {
+        $request->validate([
+            'email'=>"email|required|unique:users",
+            'fName'=>"required",
+            'lName'=>"required",
+            "password"=>"required",
+            "phone"=>"required|min:8|max:12"
+        ]);
+
+        try {
+            $admin= Voter::create([
+                'firstName'=> $request->fName,
+                'lastName'=> $request->lName,
+                'email'=> $request->email,
+                'phoneNumber'=> $request->phone,
+                'password'=>Hash::make($request->password),
+                'image'=>0,
+            ]);
+            
+            Auth::guard('voter')->loginUsingId($admin->id);
+            return redirect('voter/login');
+        } catch (\Throwable $th) {
+            return "error";
+        }
+
+    })->name('voterSignup');
+
+    // LOGIN
+    Route::get('/login', function () {
+        return view('voter.login');
+    });
+
+    Route::post('/login', function (Request $request) {
+        $request->validate([
+            'email'=>"required|email",
+            'password'=>"required"
+        ]);
+
+        try {
+            $token = Auth::guard('voter')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
+            
+            // if(!$token){
+            //     session()->flash('error', 'Invalid Login Details');
+            //     return redirect()->back();
+            // }
+            $voter = auth()->guard('voter')->user();
+            return redirect()->to('voter/dashboard');
+         
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Invalid Login Details');
+            return redirect()->back();
+        }   
+    })->name('voterLogin');
+
+     // DASHBORAD
+     Route::get('/dashboard', function(){
+        $cont = DB::table('contestantDetails')->get();
+        return view('voter.dashboard')->with(['show'=>$cont]);
+    });
+
+    Route::post('/dashboard', function(){
+        $validateVoter = auth()->guard('voter')->user()->id;
+        dd($validateVoter);
+
+        return view('voter.dashboard');
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            return "error";
+        }
+    })->name('vote');
 });
 
 
@@ -208,3 +316,9 @@ Route::get('google',function(){
 Route::get('auth/redirect', 'App\Http\Controllers\SocialController@redirect');
 Route::get('auth/callback', 'App\Http\Controllers\SocialController@callback');
 
+
+// PAYPAL
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');

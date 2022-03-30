@@ -18,6 +18,12 @@
   .js-count-particles{ font-size: 1.1em; } 
   #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } 
   #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
+  
+  .panell{
+      padding-left: 15%;
+      margin-top: 5%; 
+    position: relative;
+  }
   .addVote{
       background-color: green;
       color:white;
@@ -31,7 +37,7 @@
   }
     .show2{
         background-color: white;
-        box-shadow:  5px 5px 5px 5px rgba(110, 110, 110, 0.4);
+        box-shadow:  2px 2px 2px 2px rgba(110, 110, 110, 0.2);
         padding: 1%;
         margin-bottom: 10px;
         display: flex;
@@ -47,7 +53,7 @@
   .panel{
       margin: auto;
       width: 40%;
-      box-shadow:  5px 5px 5px 5px rgba(110, 110, 110, 0.4);
+      box-shadow:  2px 2px 2px 2px rgba(110, 110, 110, 0.2);
       padding: 2%;
       background-color: white;
       animation: animatezoom 0.6s;
