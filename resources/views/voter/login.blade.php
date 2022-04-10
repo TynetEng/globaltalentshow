@@ -21,7 +21,10 @@
                     <img src="../image/Global Talent.png" alt="">
                 </a>
             </div>
-            <div>
+            <div class="headie">
+                <div class="avatar">
+
+                </div>
                 <h4> Voter login</h4>
             </div>
             <form action="{{route('voterLogin')}}" method="post">
@@ -57,9 +60,9 @@
                     <button type="submit">LOGIN</button>
                 </div>
             </form>
-            <div>
+            <footer>
                 <p>Don't have an account? <span><a href="./signup">signup</a></span></p>
-            </div>
+            </footer>
         </div>
         
     </div>
@@ -74,8 +77,15 @@
             margin-top: 10%;
             box-shadow: 2px 2px 2px 0px rgb(128, 127, 127);
         }
-        img{
-            width: 70%;   
+        .headie{
+            text-align: center;
+        }
+        .avatar{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid black;
+            margin: auto;
         }
         .cont{
             display: flex;
@@ -94,6 +104,9 @@
             font-weight: bold;
         }
 
+        footer{
+            text-align: center;
+        }
         @media(max-width:760px){
             .parent{
                 width: 100%;

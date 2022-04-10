@@ -18,7 +18,8 @@ class ContestantDetails extends Migration
             $table->string('name');
             $table->string('information');
             $table->string('image');
-            $table->timestamps();
+            $table->string('trackingNumber')->unique();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -32,3 +33,4 @@ class ContestantDetails extends Migration
         Schema::dropIfExists('contestantDetails');
     }
 }
+// https://triplebyte.com/tb/oluwatoyin-janet-gitx7yg/certificate

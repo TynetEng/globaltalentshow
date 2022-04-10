@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-         <link rel="stylesheet" href="{{url('/css/voterDash.css')}}">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="{{url('/css/voterDash.css')}}">
     <title>Document</title>
 </head>
 <body>
@@ -22,37 +22,24 @@
             <div class="parent">
                 <div class="fillGroup">
                     <div class="fill">
-                        <form action="{{route('vote')}}" method="post">
-                            @foreach ($show as $i)
-                                <div class="show2">
-                                    <div>
-                                        <h4>{{$i->name}}</h4>
-                                        <p>{{$i->information}}</p>
-                                    </div>
-                                    <div class="lop">
-                                        <img id="imagg">
-                                        <div class="change">
-                                            <button class="view" type="submit" onclick="vote({{$i->id}})">VOTE</button>
-                                        </div>
-                                    </div>
-                                    @csrf
+                        @foreach ($show as $i)
+                            <div class="show2">
+                                <div>
+                                    <h4>{{$i->name}}</h4>
+                                    <p>{{$i->information}}</p>
                                 </div>
-                            @endforeach
-                        </form>
-                        <div>
-                            <a class="btn btn-primary m-3" href="{{ route('processTransaction') }}">Pay $5 for vote</a>
-                            @if(\Session::has('error'))
-                                <div class="alert alert-danger">{{ \Session::get('error') }}</div>
-                                {{ \Session::forget('error') }}
-                            @endif
-                            @if(\Session::has('success'))
-                                <div class="alert alert-success">{{ \Session::get('success') }}</div>
-                                {{ \Session::forget('success') }}
-                            @endif
-                        </div>
+                                <div class="lop">
+                                    <img id="imagg" src="{{asset('images/'.$i->image)}}">
+                                    <div class="change">
+                                        <button class="view" type="submit" onclick="vote({{$i->id}})">VOTE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        <div id="paymentt"></div>
                     </div>
                 </div>
-
+                
                 
             </div>
         </div>
@@ -62,9 +49,70 @@
         
     </style>
     <script>
-       
+        let details = @json($show);
+        
+        // FUNCTIONALITY FOR VOTE
         function vote(params){
-            alert(params);
+            for (let i = 0; i < details.length; i++) {
+                if (params==details[i].id) {
+                    document.getElementById('paymentt').innerHTML = `
+                        <div class="payment shadow-bg">
+                            <div>
+                                <div>
+                                    <button class="close" type="button" onclick="closePayment()">
+                                        <span>×</span>
+                                    </button>
+                                </div>
+                                <div>
+                                    <p>Vote for <span><input type="text" value="${details[i].name}" name="contestant" readonly id="contestant"></span></p>
+                                </div>
+                            </div>
+
+                            
+                            <form action="{{url('paypal')}}" method="post">
+                                @if(\Session::has('error'))
+                                    <div class="alert alert-danger">{{ \Session::get('error') }}</div>
+                                    {{ \Session::forget('error') }}
+                                @endif
+                                @if(\Session::has('success'))
+                                    <div class="alert alert-success">{{ \Session::get('success') }}</div>
+                                    {{ \Session::forget('success') }}
+                                @endif
+
+                                <div class="take">
+                                    <a class="btn btn-primary" href="{{ route('processTransaction') }}">Pay $5 for vote with Paypal</a>
+                                </div>
+                                
+                                @csrf
+                            </form>
+
+                            
+                            <div class="paystack">
+                                <form action="{{route('paystack')}}" method="post">
+                                    @if(\Session::has('error'))
+                                        <div class="alert alert-danger">{{ \Session::get('error') }}</div>
+                                        {{ \Session::forget('error') }}
+                                    @endif
+                                    @if(\Session::has('success'))
+                                        <div class="alert alert-success">{{ \Session::get('success') }}</div>
+                                        {{ \Session::forget('success') }}
+                                    @endif
+
+                                    <div class="take">
+                                        <button class="btn btn-primary" type="submit">Pay #2000 for vote with Paystack</button>
+                                    </div>
+                                    
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    `
+                }   
+            }   
+        }
+
+        function closePayment(){
+            document.querySelector('.payment').style.display= "none"
         }
     </script>
     <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_SANDBOX_CLIENT_ID') }}"></script>

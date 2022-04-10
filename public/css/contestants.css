@@ -1,24 +1,4 @@
-  /* ---- reset ---- */ 
-  canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container ---- */ 
-  #particles-js{ 
-      position:absolute; 
-      width: 100%; 
-      height: 1000px !important;
-      max-height: fit-content !important;
-      background-color: black; 
-      background-image: url("");
-      background-repeat: no-repeat; 
-      background-size: cover; 
-      background-position: 50% 50%;
-      padding: 0px !important;
-      margin: 0px !important;
-      overflow-x: hidden;
-   } 
-  /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; display: none; top: 48px; left: 0; width: 80px; display: none; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } 
-  .js-count-particles{ font-size: 1.1em; } 
-  #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } 
-  #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
-  
+ /* MAIN */
   .panell{
       padding-left: 15%;
       margin-top: 5%; 
@@ -46,21 +26,30 @@
     .fill{
         padding-top: 20px;
     }
+    .till{
+        border: 0 !important;
+        outline: 0 !important;
+        font-weight: bold;
+    }
     #imagg{
         width: 100px;
         height: 100px;
     }
   .panel{
       margin: auto;
-      width: 40%;
+      width: 30%;
       box-shadow:  2px 2px 2px 2px rgba(110, 110, 110, 0.2);
       padding: 2%;
       background-color: white;
       animation: animatezoom 0.6s;
-      position: absolute;
-      top: 20%;
-      left: 30%;
+      position: fixed;
+      z-index: 1000;
+      top: 5%;
+      left: 40% !important;
+      height: 90vh;
+      overflow-y: scroll;
     }
+    
     .close{
         right: 0px !important;
         border: 0px;
@@ -93,24 +82,82 @@
       width: 100%;
   }
   .image{
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       border: 1px solid lightgrey;
       margin-bottom: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
-  .parent{
-      position: relative;
-  }
+.imagg{
+    width: 100%;
+    height: 100%;
+    border: 1px solid lightgrey;
+}
 
+.part{
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+label{
+    font-weight: bold;
+}
+
+.till{
+    border: 0 !important;
+    outline: 0 !important;
+    font-weight: bold;
+}
+
+.till:focus{
+    border: 0 !important;
+    outline: 0 !important;
+}
+.generate{
+    font-size: 12px;
+    background-color: #0061AB !important;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.fillCode{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    border: 1px solid lightgray;
+    padding: 1%;
+    border-radius: 6px;
+}
+
+
+.parent{
+    position: relative;
+}
+.team{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.change form{
+    margin-left: 2%;
+}
    /* BUTTON */
    .change{
        padding-top: 2%;
+       display: flex;
+       justify-content: space-between;
+       margin-right: 10px;
    }
     .view, .edit, .del{
         color: white;
         border: none;
         border-radius: 5px;
         padding: 2px 5px;
+        margin-left: 2%;
     }
     .view{
         background-color: blue;

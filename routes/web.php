@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
 use App\Models\Admin;
+use App\Models\Payment;
 use App\Models\Voter;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,8 +39,8 @@ Route::prefix('admin')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required",
-            "phone"=>"required|min:8|max:12"
+            "password"=>"required|min:8|max:12",
+            "phone"=>"required"
         ]);
 
         try {
@@ -74,10 +75,6 @@ Route::prefix('admin')->group(function(){
 
         try {
             $token = Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
-            // if(!$token){
-            //     session()->flash('error', 'Invalid Login Details');
-            //     return redirect()->back();
-            // }
             $admin = auth()->guard('admin')->user();
             return redirect()->to('admin/dashboard');
          
@@ -123,7 +120,8 @@ Route::prefix('admin')->group(function(){
         $request->validate([
             'contName'=>"required",
             'contInfo'=>"required",
-            'image'=>"required"
+            'image'=>"required|mimes:png,jpg,jpeg|max:5048",
+            'code'=>'required'
         ]);
     
         $image = $request->image;
@@ -132,24 +130,31 @@ Route::prefix('admin')->group(function(){
             $gen = mt_rand(10000, 90000);
             $ext = $request->image->extension();
             $path= $gen . ".". $ext;
-            $show= $request->image->storeAs('image', $path);
+            $show= $request->image->move(public_path('images'), $path);
 
-            // $fill= Storage::disk("public")->get();
-            // dd($fill);
-    
             $details= DB::table('contestantDetails')->insert([
                 'name'=>$request->contName,
                 'information'=>$request->contInfo,
-                'image'=>$show
+                'image'=>$path,
+                'trackingNumber'=>$request->code,
+                'created_at' =>now(),
+                'updated_at' => now()
             ]);    
         }
         if($details){
-            return "Contestant details updated successfully";
+            session()->flash('success', 'Contestant details updated successfully');
+            return redirect('/admin/contestant');
         }
         else{
-            return "Error occurred";
+            session()->flash('error', 'Error occurred');
+            return redirect()->back();
         }   
     })->name('contestant');
+
+    // EDIT CONTESTANT FORM
+    // Route::post('/contestant', function(Request $request) {
+    //     return "hello";
+    // })->name('editForm');
 
     // PROFILE
 
@@ -195,8 +200,8 @@ Route::prefix('voter')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required",
-            "phone"=>"required|min:8|max:12"
+            "password"=>"required|min:8|max:12",
+            "phone"=>"required"
         ]);
 
         try {
@@ -230,11 +235,6 @@ Route::prefix('voter')->group(function(){
 
         try {
             $token = Auth::guard('voter')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
-            
-            // if(!$token){
-            //     session()->flash('error', 'Invalid Login Details');
-            //     return redirect()->back();
-            // }
             $voter = auth()->guard('voter')->user();
             return redirect()->to('voter/dashboard');
          
@@ -244,23 +244,53 @@ Route::prefix('voter')->group(function(){
         }   
     })->name('voterLogin');
 
-     // DASHBORAD
-     Route::get('/dashboard', function(){
+    // DASHBORAD
+    Route::get('/dashboard', function(){
+       
         $cont = DB::table('contestantDetails')->get();
         return view('voter.dashboard')->with(['show'=>$cont]);
     });
 
-    Route::post('/dashboard', function(){
+    // VOTE PAYMENT WITH PAYPAL
+    Route::post('/dashboard', function(Request $request){
         $validateVoter = auth()->guard('voter')->user()->id;
-        dd($validateVoter);
 
-        return view('voter.dashboard');
         try {
-            //code...
+            DB::beginTransaction();
+            $payment= Payment::create([
+                'contestantName'=> $request->contestant,
+                'user_id'=> $validateVoter,
+                'modeOfPayment'=>'',
+                'created_at' =>now(),
+            ]);
+    
+            DB::commit();
         } catch (\Throwable $th) {
-            return "error";
+        //throw error
+            DB::rollBack();
         }
-    })->name('vote');
+    })->name('paypal');
+
+    // VOTE PAYMENT WITH PAYSTACK   
+    Route::post('/dashboard', function(Request $request){
+        $validateVoter = auth()->guard('voter')->user()->id;
+        
+        try {
+            DB::beginTransaction();
+            $payment= Payment::create([
+                'contestantName'=> $request->contestant,
+                'user_id'=> $validateVoter,
+                'modeOfPayment'=>'',
+                'created_at' =>now(),
+            ]);
+            
+            return "Successful payment";
+            DB::commit();
+        } catch (\Throwable $th) {
+        //throw error
+            DB::rollBack();
+        }
+    })->name('paystack');
 });
 
 

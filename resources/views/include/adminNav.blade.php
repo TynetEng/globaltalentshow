@@ -20,7 +20,7 @@
 <body>
     
     <div class="container-fluid">
-        <div>
+        <div class="backColor">
             <!-- particles.js container --> <div id="particles-js"></div> 
             <!-- stats - count particles --> <div class="count-particles"> 
                 <span class="js-count-particles">--</span> particles </div> 
@@ -40,75 +40,77 @@
                             <i class="fa fa-bars"></i>
                         </button>
                     </div>
-                    <div class="board">
-                        <a href="./dashboard">
-                            <div>
-                                <i class="fa fa-delicious"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Dashboard</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="./profile">
-                            <div>
-                                <i class="fa fa-user-circle-o"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Profile</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-bell"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Notification</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="./contestant">
-                            <div>
-                                <i class="fa fa-users"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Contestants</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-search"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Search</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-cog"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Settings</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="board">
-                        <a href="">
-                            <div>
-                                <i class="fa fa-sign-out"></i>
-                            </div>
-                            <div class="exp">
-                                <span>Logout</span>
-                            </div>
-                        </a>
+                    <div class="dash">
+                        <div class="board">
+                            <a href="./dashboard">
+                                <div>
+                                    <i class="fa fa-delicious"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Dashboard</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="board">
+                            <a href="./profile">
+                                <div>
+                                    <i class="fa fa-user-circle-o"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Profile</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="board">
+                            <a href="">
+                                <div>
+                                    <i class="fa fa-bell"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Notification</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="board">
+                            <a href="./contestant">
+                                <div>
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Contestants</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="board">
+                            <a href="">
+                                <div>
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Search</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="board">
+                            <a href="">
+                                <div>
+                                    <i class="fa fa-cog"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Settings</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="board">
+                            <a href="">
+                                <div>
+                                    <i class="fa fa-sign-out"></i>
+                                </div>
+                                <div class="exp">
+                                    <span>Logout</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </aside>
 
@@ -166,7 +168,7 @@
         
 
         function toggleBar(){
-            document.querySelector('.exp').classList.toggle('.toogle');
+            document.querySelector('.exp').classList.toggle('.exp');
         }
     </script>
 </body>
