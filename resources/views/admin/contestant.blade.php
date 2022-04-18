@@ -43,20 +43,18 @@
                                         <div class="change">
 
                                             <!-- VIEW FORM -->
-                                            <form action="{{url('viewForm')}}" method="post">
-                                                @csrf
-                                                <button class="view">VIEW</button>
-                                            </form>
+                                            <button class="view" onclick="viewForm({{$i->id}})">VIEW</button>
 
                                             <!-- EDIT FORM -->
-                                            <form action="{{url('editForm')}}" method="post">
-                                                <button class="edit">EDIT</button>
-                                            </form>
+                                            <button onclick="editForm({{$i->id}})" class="edit">EDIT</button>
 
                                             <!-- DELETE FORM -->
-                                            <form action="{{url('deleteForm')}}" method="post">
-                                                <button class="del">DELETE</button>
+                                            <form action="{{route('delete-contestant', ['id'=>$i->id])}}" method="post">
+                                                @csrf
+                                                <button class="del" type="submit" onclick="return confirm('Are you sure you want to delete this contestant?')">
+                                                     DELETE</button>
                                             </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +99,7 @@
                                 <button class="close" onclick="exitForm()"><i class="fa fa-close"></i></button>
                             </div>
                             <div class="inner">
-                                <form action="{{route('contestant')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{url('contestantForm')}}" method="POST" enctype="multipart/form-data">
                                     @if($su=Session::get('error'))
                                         <div class="alert alert-danger  alert-dismissible fade show"  role="alert">
                                             <strong>{{$su}}</strong>
@@ -196,7 +194,15 @@
             document.querySelector('.panel').style.display= "none";
         }
 
-        
+        // ROUTE TO EDIT CONTESTANT FORM
+        function editForm(params){
+            window.location.href =`edit-contestant/${params}`;
+        }
+
+        // ROUTE TO VIEW CONTESTANT FORM
+        function viewForm(params){
+            window.location.href =`view-contestant/${params}`;
+        }
         
     </script>
 </body>

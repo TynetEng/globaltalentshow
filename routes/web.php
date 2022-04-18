@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PaystackController;
 use App\Models\Admin;
+use App\Models\ContestantDetail;
 use App\Models\Payment;
+use App\Models\Votepayment;
 use App\Models\Voter;
 use Illuminate\Support\Facades\Storage;
 
@@ -114,7 +118,7 @@ Route::prefix('admin')->group(function(){
         ->get();
 
         return view('admin.contestant')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec, 'show'=>$cont]);
-    });
+    })->name('contestant');
 
     Route::post('/contestant', function(Request $request) {
         $request->validate([
@@ -123,38 +127,124 @@ Route::prefix('admin')->group(function(){
             'image'=>"required|mimes:png,jpg,jpeg|max:5048",
             'code'=>'required'
         ]);
+        
+        try {
+            $image = $request->image;
     
-        $image = $request->image;
-    
-        if($image !== null){
-            $gen = mt_rand(10000, 90000);
-            $ext = $request->image->extension();
-            $path= $gen . ".". $ext;
-            $show= $request->image->move(public_path('images'), $path);
+            if($image !== null){
+                $gen = mt_rand(10000, 90000);
+                $ext = $request->image->extension();
+                $path= $gen . ".". $ext;
+                $show= $request->image->move(public_path('images'), $path);
 
-            $details= DB::table('contestantDetails')->insert([
-                'name'=>$request->contName,
-                'information'=>$request->contInfo,
-                'image'=>$path,
-                'trackingNumber'=>$request->code,
-                'created_at' =>now(),
-                'updated_at' => now()
-            ]);    
-        }
-        if($details){
-            session()->flash('success', 'Contestant details updated successfully');
-            return redirect('/admin/contestant');
-        }
-        else{
-            session()->flash('error', 'Error occurred');
+                $details= DB::table('contestantDetails')->insert([
+                    'name'=>$request->contName,
+                    'information'=>$request->contInfo,
+                    'image'=>$path,
+                    'trackingNumber'=>$request->code,
+                    'created_at' =>now(),
+                    'updated_at' => now()
+                ]);    
+            }
+            if($details){
+                session()->flash('success', 'Contestant details updated successfully');
+                return redirect('admin.contestant');
+            }
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Invalid Login Details');
             return redirect()->back();
-        }   
-    })->name('contestant');
+        } 
+    })->name('contestantForm');
 
     // EDIT CONTESTANT FORM
-    // Route::post('/contestant', function(Request $request) {
-    //     return "hello";
-    // })->name('editForm');
+    Route::get('/edit-contestant/{id}', function($id){
+        // VALIDATE ADMIN
+        $validateAdmin = auth()->guard('admin')->user()->id;
+
+        $a = auth()->guard('admin')->user()->firstName;
+        $b = auth()->guard('admin')->user()->lastName;
+        $first= substr($a,0,1);
+        $sec= substr($b,0,1);
+        $data = DB::table('admins')
+                ->where('id', $validateAdmin)
+                ->get();
+
+        try {
+            $check= DB::table('contestantDetails')->where('id', $id)->first();
+
+        
+            // RETURN VIEW
+            return view('admin.edit-contestant')->with(['dataa'=>$check, 'data'=>$data, 'first'=>$first, 'sec'=>$sec]);
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Error Occurred');
+            return redirect()->back();
+        }
+    });
+
+    Route::post('/edit-contestant', function(Request $request){
+        $validateAdmin = auth()->guard('admin')->user();
+        $i = Contestantdetail::where('id', $request->id)->first();
+        
+       if($validateAdmin){
+            try {        
+                $data= Contestantdetail::find($request->id);
+                $data->name=$request->contName;
+                $data->information=$request->contInfo;
+                $data->updated_at=now();
+                $data->trackingNumber=$request->code;
+                $data->created_at= $i->created_at;
+                $data->image=$i->image;
+                $data->save();
+                
+                session()->flash('success', 'Contestant details updated successfully');
+                return redirect('admin/contestant');
+                
+            } catch (\Throwable $th) {
+                session()->flash('error', 'Error Occurred');
+                return redirect()->back();
+            }
+       }
+    })->name('update');
+
+    // VIEW CONTESTANT FORM
+    Route::get('/view-contestant/{id}', function($id){
+        // VALIDATE ADMIN
+        $validateAdmin = auth()->guard('admin')->user()->id;
+
+        $a = auth()->guard('admin')->user()->firstName;
+        $b = auth()->guard('admin')->user()->lastName;
+        $first= substr($a,0,1);
+        $sec= substr($b,0,1);
+        $data = DB::table('admins')
+                ->where('id', $validateAdmin)
+                ->get();
+
+        try {
+            $check= DB::table('contestantDetails')->where('id', $id)->first();
+
+        
+            // RETURN VIEW
+            return view('admin.view-contestant')->with(['dataa'=>$check, 'data'=>$data, 'first'=>$first, 'sec'=>$sec]);
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Error Occurred');
+            return redirect()->back();
+        }
+    });
+
+    // DELETE CONTESTANT FORM
+    Route::post('delete-contestant/{id}', function(Request $request, $id){
+       try {
+            $contestant = DB::table('contestantDetails')
+            ->where('id',$id)            
+            ->delete();
+
+            echo session()->flash('success', 'Contestant details deleted successfully');
+            return redirect('admin/contestant');
+       } catch (\Throwable $th) {
+           //throw $th;
+       }
+    })->name('delete-contestant');
+
 
     // PROFILE
 
@@ -248,7 +338,8 @@ Route::prefix('voter')->group(function(){
     Route::get('/dashboard', function(){
        
         $cont = DB::table('contestantDetails')->get();
-        return view('voter.dashboard')->with(['show'=>$cont]);
+        $voter = auth()->guard('voter')->user();
+        return view('voter.dashboard')->with(['show'=>$cont, 'voter'=>$voter]);
     });
 
     // VOTE PAYMENT WITH PAYPAL
@@ -257,7 +348,7 @@ Route::prefix('voter')->group(function(){
 
         try {
             DB::beginTransaction();
-            $payment= Payment::create([
+            $payment= Votepayment::create([
                 'contestantName'=> $request->contestant,
                 'user_id'=> $validateVoter,
                 'modeOfPayment'=>'',
@@ -270,27 +361,12 @@ Route::prefix('voter')->group(function(){
             DB::rollBack();
         }
     })->name('paypal');
+    
+//     // Laravel 8
+// Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('paystack');
 
     // VOTE PAYMENT WITH PAYSTACK   
-    Route::post('/dashboard', function(Request $request){
-        $validateVoter = auth()->guard('voter')->user()->id;
-        
-        try {
-            DB::beginTransaction();
-            $payment= Payment::create([
-                'contestantName'=> $request->contestant,
-                'user_id'=> $validateVoter,
-                'modeOfPayment'=>'',
-                'created_at' =>now(),
-            ]);
-            
-            return "Successful payment";
-            DB::commit();
-        } catch (\Throwable $th) {
-        //throw error
-            DB::rollBack();
-        }
-    })->name('paystack');
+    Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
 });
 
 
@@ -352,3 +428,6 @@ Route::get('create-transaction', [PayPalController::class, 'createTransaction'])
 Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+// PAYSTACK
+Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('payment');

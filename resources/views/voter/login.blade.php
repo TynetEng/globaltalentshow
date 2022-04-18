@@ -25,7 +25,7 @@
                 <div class="avatar">
 
                 </div>
-                <h4> Voter login</h4>
+                <h4> Voter Login</h4>
             </div>
             <form action="{{route('voterLogin')}}" method="post">
                 @if($su=Session::get('error'))
@@ -38,14 +38,14 @@
                 @endif  
                 <div>
                     <label for="">Email</label>
-                    <input type="text" name="email" value="{{old('emaill')}}" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
+                    <input type="text" name="email" value="{{old('emaill')}}" placeholder="mail@website.com" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="password" value="{{old('passwordd')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="password" value="{{old('passwordd')}}" placeholder="Min. 8 characters and max. 12 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
@@ -61,7 +61,7 @@
                 </div>
             </form>
             <footer>
-                <p>Don't have an account? <span><a href="./signup">signup</a></span></p>
+                <p>Not registered yet? <span><a href="./signup">Create an account</a></span></p>
             </footer>
         </div>
         
@@ -97,7 +97,7 @@
         }
         .logg button{
             border: 0px;
-            background-color: green;
+            background-color: rgb(154, 3, 30);
             color: white;
             border-radius: 5px;
             padding: 2px 10px;

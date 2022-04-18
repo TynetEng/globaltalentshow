@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
-
+        
         /*
          * Package Service Providers...
          */
@@ -176,6 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
+
 
     ],
 
@@ -233,7 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' =>  Laravel\Socialite\Facades\Socialite::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
-
+        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
     ],
 
 ];

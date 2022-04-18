@@ -33,7 +33,7 @@
             <div class="fill">
                 <aside>
                     <div class="clip">
-                        <img src="./image/Global Talent white.png" alt="">
+                        <img class='imgg' src="{{asset('image/white.png')}}" alt="" width="100">
                     </div>
                     <div>
                         <button class="dew" onclick="toggleBar()"> 

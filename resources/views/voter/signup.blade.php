@@ -30,35 +30,35 @@
 
                 <div>
                     <label for="">First Name</label>
-                    <input type="text" name="fName" value="{{old('fName')}}" class="form-control {{$errors->has('fName') ? 'is-inavlid' : '' }}">
+                    <input type="text" placeholder="First Name" name="fName" value="{{old('fName')}}" class="form-control {{$errors->has('fName') ? 'is-inavlid' : '' }}">
                     @error('fName')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Last Name</label>
-                    <input type="text" name="lName" value="{{old('lName')}}" class="form-control {{$errors->has('lName') ? 'is-inavlid' : '' }}">
+                    <input type="text" placeholder="Last Name" name="lName" value="{{old('lName')}}" class="form-control {{$errors->has('lName') ? 'is-inavlid' : '' }}">
                     @error('lName')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Email</label>
-                    <input type="text" name="email" value="{{old('email')}}" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
+                    <input type="text"  placeholder="mail@website.com" name="email" value="{{old('email')}}" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Phone Number</label>
-                    <input type="text" name="phone" value="{{old('phone')}}" class="form-control {{$errors->has('phone') ? 'is-inavlid' : '' }}">
+                    <input type="text" placeholder="0**********" name="phone" value="{{old('phone')}}" class="form-control {{$errors->has('phone') ? 'is-inavlid' : '' }}">
                     @error('phone')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="password" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="password" placeholder="Min. 8 characters and max. 12 characters" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
@@ -80,7 +80,7 @@
 
             
             <div class="pat1">
-                <p>Already a user? <span><a href="./login">Login</a></span></p>
+                <p><span>Already have an account? </span> <span><a href="./login">Login</a></span></p>
             </div>
 
             <div class="pat2">
@@ -96,7 +96,7 @@
         .parent{
             margin: auto;
             width: 30%;
-            margin-top: 5%;
+            margin-top: 2%;
             box-shadow: 2px 2px 2px 0px rgb(128, 127, 127);
         }
         img{
@@ -113,7 +113,7 @@
         }
         .logg button{
             border: 0px;
-            background-color: green;
+            background-color: rgb(154, 3, 30);
             color: white;
             border-radius: 5px;
             padding: 2px 10px;
