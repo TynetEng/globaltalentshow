@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'voters',
         ],
+        'contestant' => [
+            'driver' => 'session',
+            'provider' => 'contestants',
+        ],
     ],
 
     /*
@@ -80,6 +84,10 @@ return [
         'voters' => [
             'driver' => 'eloquent',
             'model' => App\Models\Voter::class,
+        ],
+        'contestants' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Contestant::class,
         ],
 
         // 'users' => [
@@ -118,6 +126,12 @@ return [
         ],
         'voters' => [
             'provider' => 'voters',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'contestants' => [
+            'provider' => 'contestants',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

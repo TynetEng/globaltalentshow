@@ -57,7 +57,7 @@ class PaymentController extends Controller
                     'amount'=>$paymentDetails['data']['amount'],
                     'voterName'=>$paymentDetails['data']['metadata']['voter_name'],
                     'customerId'=>$paymentDetails['data']['customer']['id'],
-                    'modeOfPayment'=>'',
+                    'modeOfPayment'=>'Paystack',
                     'created_at' =>now(),
                 ]);
                 DB::commit();

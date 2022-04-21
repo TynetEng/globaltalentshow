@@ -19,9 +19,9 @@
                 </a>
             </div>
             <div>
-                <h4> Voter Signup</h4>
+                <h4> Contestant Signup</h4>
             </div>
-            <form action="{{route('voterSignup')}}" method="post">
+            <form action="{{route('contestantSignup')}}" method="post">
                 @if($su=Session::get('error'))
                     <div class="alert alert-danger">
                         <strong>{{$su}}</strong>
@@ -71,7 +71,7 @@
                     <span>OR</span>
                 </div>
                 <div class="google">
-                    <a href="{{url('voter/auth/redirect')}}">
+                    <a href="{{url('contestant/auth/redirect')}}">
                         <span><i class="fa fa-google"></i></span>
                         <span>Continue with Google</span>
                     </a>
@@ -146,6 +146,9 @@
         }
         .pat3{
             color:blue;
+        }
+        h4{
+            text-align: center;
         }
 
         @media(max-width:760px){

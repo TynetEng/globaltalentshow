@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\PaystackController;
 use App\Models\Admin;
+use App\Models\Contestant;
 use App\Models\ContestantDetail;
 use App\Models\Payment;
 use App\Models\Votepayment;
@@ -31,6 +32,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ADMIN
 Route::prefix('admin')->group(function(){
 
     // SIGNUP
@@ -88,6 +90,9 @@ Route::prefix('admin')->group(function(){
         }   
     })->name('adminLogin');
 
+    // GOOGLE SOCIALITE
+    Route::get('/auth/redirect', 'App\Http\Controllers\AdminSocialController@redirect');
+   
     // DASHBOARD
     Route::get('/dashboard', function(){
         $validateAdmin = auth()->guard('admin')->user()->id;
@@ -293,18 +298,20 @@ Route::prefix('voter')->group(function(){
             "password"=>"required|min:8|max:12",
             "phone"=>"required"
         ]);
-
+        
         try {
-            $admin= Voter::create([
+            $voter= Voter::create([
                 'firstName'=> $request->fName,
                 'lastName'=> $request->lName,
                 'email'=> $request->email,
                 'phoneNumber'=> $request->phone,
                 'password'=>Hash::make($request->password),
                 'image'=>0,
+                'google_id'=>''
             ]);
             
-            Auth::guard('voter')->loginUsingId($admin->id);
+            dd($voter);
+            Auth::guard('voter')->loginUsingId($voter->id);
             return redirect('voter/login');
         } catch (\Throwable $th) {
             return "error";
@@ -334,6 +341,9 @@ Route::prefix('voter')->group(function(){
         }   
     })->name('voterLogin');
 
+    // GOOGLE SOCIALITE
+    Route::get('/auth/redirect', 'App\Http\Controllers\VoterSocialController@redirect');
+
     // DASHBORAD
     Route::get('/dashboard', function(){
        
@@ -362,8 +372,6 @@ Route::prefix('voter')->group(function(){
         }
     })->name('paypal');
     
-//     // Laravel 8
-// Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('paystack');
 
     // VOTE PAYMENT WITH PAYSTACK   
     Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
@@ -372,6 +380,65 @@ Route::prefix('voter')->group(function(){
 
 // CONTESTANT
 Route::prefix('contestant')->group(function(){
+
+     // GOOGLE SOCIALITE
+    Route::get('/auth/redirect', 'App\Http\Controllers\ContestantSocialController@redirect');
+    
+    // CONTESTANT SIGNUP
+    Route::get('/signup', function () {
+        return view('contestant.signup');
+    });
+
+    Route::post('/signup', function (Request $request) {
+        $request->validate([
+            'email'=>"email|required|unique:users",
+            'fName'=>"required",
+            'lName'=>"required",
+            "password"=>"required|min:8|max:12",
+            "phone"=>"required"
+        ]);
+        
+        try {
+            // $a = Contestant::first();
+            // dd($a);
+            $contestant= Contestant::create([
+                'firstName'=> $request->fName,
+                'lastName'=> $request->lName,
+                'email'=> $request->email,
+                'phoneNumber'=> $request->phone,
+                'password'=>Hash::make($request->password),
+                'image'=>0
+            ]);
+            var_dump($contestant);
+            Auth::guard('contestant')->loginUsingId($contestant->id);
+            return redirect('contestant/login');
+        } catch (\Throwable $th) {
+            return "error";
+        }
+
+    })->name('contestantSignup');
+
+    // CONTESTANT LOGIN
+    Route::get('/login', function () {
+        return view('contestant.login');
+    });
+
+    Route::post('/login', function (Request $request) {
+        $request->validate([
+            'email'=>"required|email",
+            'password'=>"required"
+        ]);
+
+        try {
+            $token = Auth::guard('contestant')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
+            $contestant = auth()->guard('contestant')->user();
+            return redirect()->to('contestant/dashboard');
+         
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Invalid Login Details');
+            return redirect()->back();
+        }   
+    })->name('contestantLogin');
 
     // DASHBORAD
     Route::get('/dashboard', function(){
@@ -419,8 +486,8 @@ Route::get('google',function(){
 // Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
 // Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
-Route::get('auth/redirect', 'App\Http\Controllers\SocialController@redirect');
-Route::get('auth/callback', 'App\Http\Controllers\SocialController@callback');
+// Route::get('auth/redirect', 'App\Http\Controllers\SocialController@redirect');
+// Route::get('auth/callback', 'App\Http\Controllers\SocialController@callback');
 
 
 // PAYPAL
@@ -431,3 +498,12 @@ Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])
 
 // PAYSTACK
 Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('payment');
+
+// ADMIN GOOGLE LOGIN
+Route::get('auth/google/callback', 'App\Http\Controllers\AdminSocialController@callback');
+
+// VOTER GOOGLE LOGIN
+Route::get('auth/google/callback', 'App\Http\Controllers\VoterSocialController@callback');
+
+// CONTESTANT GOOGLE LOGIN
+Route::get('auth/google/callback', 'App\Http\Controllers\ContestantSocialController@callback');
