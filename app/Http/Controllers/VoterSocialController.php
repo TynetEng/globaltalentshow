@@ -32,6 +32,7 @@ public function callback()
             if($findVoter){
                 // return "hi";
                 Auth::guard('voter')->login($findVoter);
+                $voter = auth()->guard('voter')->user();
                 return redirect('/voter/dashboard');
             }else{
                 // return "hello";
@@ -48,6 +49,7 @@ public function callback()
                 ]);
                 
                 Auth::guard('voter')->login($newUser);
+                $voter = auth()->guard('voter')->user();
                 return redirect('/voter/dashboard');
             }
         } catch (Exception $e) {

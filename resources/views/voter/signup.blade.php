@@ -13,12 +13,12 @@
     <div class="parent">
         <div class="card card-body">
 
-            <div class="cont">
+            <div class="cont text-center">
                 <a href="#" class="navbar-brand">
                     <img src="../image/Global Talent.png" alt="">
                 </a>
             </div>
-            <div>
+            <div class="text-center">
                 <h4> Voter Signup</h4>
             </div>
             <form action="{{route('voterSignup')}}" method="post">
@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="password" placeholder="Min. 8 characters and max. 12 characters" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="password" placeholder="Min. 8 characters" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
@@ -80,7 +80,7 @@
 
             
             <div class="pat1">
-                <p><span>Already have an account? </span> <span><a href="./login">Login</a></span></p>
+                <p><span>Already have an account? </span> <span><a href="./login" class="text-decoration-none">Login</a></span></p>
             </div>
 
             <div class="pat2">
@@ -146,6 +146,9 @@
         }
         .pat3{
             color:blue;
+        }
+        label{
+            font-weight: bold;
         }
 
         @media(max-width:760px){

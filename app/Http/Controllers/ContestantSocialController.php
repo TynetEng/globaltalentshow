@@ -31,6 +31,7 @@ public function callback()
 
             if($findContestant){
                 Auth::guard('contestant')->login($findContestant);
+                $contestant = auth()->guard('contestant')->user();
                 return redirect('/contestant/dashboard');
             }else{
                 $newUser = Contestant::insert([
@@ -47,6 +48,7 @@ public function callback()
                 return 'hello';
                 
                 Auth::guard('contestant')->login($newUser);
+                $contestant = auth()->guard('contestant')->user();
                 return redirect('/contestant/dashboard');
             }
         } catch (Exception $e) {

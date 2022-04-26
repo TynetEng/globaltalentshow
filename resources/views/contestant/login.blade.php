@@ -16,7 +16,7 @@
     <div class="parent">
         <div class="card card-body">
 
-            <div class="cont">
+            <div class="cont text-center">
                 <a href="#" class="navbar-brand">
                     <img src="../image/Global Talent.png" alt="">
                 </a>
@@ -29,39 +29,51 @@
             </div>
             <form action="{{route('contestantLogin')}}" method="post">
                 @if($su=Session::get('error'))
-                    <div class="alert alert-danger  alert-dismissible fade show"  role="alert">
+                    <div class="alert alert-danger  alert-dismissible fade show d-flex justify-content-between"  role="alert">
                         <strong>{{$su}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                        <button type="button" class="close border-0" data-dismiss="alert" aria-label="Close" style="background-color: transparent">
+                            <span aria-hidden="true" style="font-weight: bolder">×</span>
                         </button>
                     </div>
-                @endif  
+                @endif 
+                
+                @if (session('info'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('info')}}
+                    </div>
+                @endif
+
                 <div>
                     <label for="">Email</label>
-                    <input type="text" name="email" value="{{old('emaill')}}" placeholder="mail@website.com" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
+                    <input type="text" name="email" value="{{$verifiedEmail ?? old('emaill')}}" placeholder="mail@website.com" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div>
                     <label for="">Password</label>
-                    <input type="password" value="{{old('passwordd')}}" placeholder="Min. 8 characters and max. 12 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
 
-                <div>
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Remember me</label for="remember">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <input type="checkbox" id="remember">
+                        <label for="remember" class="rmb">Remember me</label for="remember">
+                    </div>
+                    <div>
+                        <a href="{{route('contestantRequest')}}" class="text-decoration-none">Forgot password?</a>
+                    </div>
                 </div>
                 @csrf
                 <div class="logg">
                     <button type="submit">LOGIN</button>
                 </div>
             </form>
-            <footer>
-                <p>Not registered yet? <span><a href="./signup">Create an account</a></span></p>
+            <footer class="text-center">
+                <p>Not registered yet? <span><a href="./signup" class="text-decoration-none">Create an account</a></span></p>
             </footer>
         </div>
         
@@ -102,6 +114,12 @@
             border-radius: 5px;
             padding: 2px 10px;
             font-weight: bold;
+        }
+        label{
+            font-weight: bold;
+        }
+        .rmb{
+            font-weight: 400
         }
 
         footer{

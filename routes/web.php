@@ -14,6 +14,8 @@ use App\Models\ContestantDetail;
 use App\Models\Payment;
 use App\Models\Votepayment;
 use App\Models\Voter;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -34,7 +36,7 @@ Route::get('/', function () {
 
 // ADMIN
 Route::prefix('admin')->group(function(){
-
+    
     // SIGNUP
     Route::get('/signup', function () {
         return view('admin.signup');
@@ -45,7 +47,7 @@ Route::prefix('admin')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required|min:8|max:12",
+            "password"=>"required|min:8",
             "phone"=>"required"
         ]);
 
@@ -82,6 +84,10 @@ Route::prefix('admin')->group(function(){
         try {
             $token = Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
             $admin = auth()->guard('admin')->user();
+            if(!$token){
+                session()->flash('error', 'Invalid Login Details');
+                return redirect()->back();
+            }
             return redirect()->to('admin/dashboard');
          
         } catch (\Throwable $th) {
@@ -93,6 +99,72 @@ Route::prefix('admin')->group(function(){
     // GOOGLE SOCIALITE
     Route::get('/auth/redirect', 'App\Http\Controllers\AdminSocialController@redirect');
    
+    // FORGET PASSWORD --RESET PASSWORD
+    Route::get('/password/request', function(){
+        return view('admin.password.request');
+    })->name('adminRequest');
+
+    Route::post('/password/request', function(Request $request){
+        $request->validate([
+            'email'=> 'required|email|exists:admins,email'
+        ]);
+
+        $token = Str::random(64);
+        DB::table('password_resets')->insert([
+            'email'=> $request->email,
+            'token'=>$token,
+            'created_at'=> Carbon::now()
+        ]);
+
+        $action_link= route('password.reset', ['token'=>$token, 'email'=>$request->email]);
+        $body= "We have received a request to reset the password for <b> Global Talent</b> account associated with
+        ".$request->email." as an Admin. You can reset your password by clicking the link below";
+
+        Mail::send('admin.email_forgot', ['action_link'=>$action_link, 'body'=>$body], function($message) use ($request){
+            $message->from('agbesuaoluwatoyin96@gmail.com', 'Global Talent');
+            $message->to($request->email, 'Your name')
+                    ->subject('Reset Password');
+        });
+        
+
+        return back()->with('success', 'We have e-mailed your password reset link!');
+    })->name('admin_send_password');
+
+    Route::get('/password/reset/{token}', function(Request $request, $token=null){
+        return view('admin.password.reset')->with(['token'=>$token, 'email'=>$request->email]);
+    })->name('admin.password.reset');
+
+    Route::post('/password/reset', function(Request $request){
+        $request->validate([
+            'email'=>'required|email|exists:admins,email',
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required'
+        ]);
+
+        $check_token = DB::table('password_resets')->where([
+            'email'=>$request->email,
+            'token'=>$request->token,
+        ])->first();
+
+        if(!$check_token){
+            return back()->withInput()->with('fail', 'Invalid Token');
+        }else{
+            Admin::where('email', $request->email)->update([
+                'password'=> Hash::make($request->password)
+            ]);
+
+            DB::table('password_resets')->where([
+                'email'=>$request->email
+            ])->delete();
+            
+            return redirect()->to('admin/login')
+            ->with('info', 'Your password has been changed! You can now login with the new password')
+            ->with(['verifiedEmail'=>$request->email]);
+        }
+    })->name('adminResetPassword');
+
+    // END FORGET PASSWORD --RESET PASSWORD
+    
     // DASHBOARD
     Route::get('/dashboard', function(){
         $validateAdmin = auth()->guard('admin')->user()->id;
@@ -295,7 +367,7 @@ Route::prefix('voter')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required|min:8|max:12",
+            "password"=>"required|min:8",
             "phone"=>"required"
         ]);
         
@@ -310,7 +382,6 @@ Route::prefix('voter')->group(function(){
                 'google_id'=>''
             ]);
             
-            dd($voter);
             Auth::guard('voter')->loginUsingId($voter->id);
             return redirect('voter/login');
         } catch (\Throwable $th) {
@@ -333,6 +404,11 @@ Route::prefix('voter')->group(function(){
         try {
             $token = Auth::guard('voter')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
             $voter = auth()->guard('voter')->user();
+            
+            if(!$token){
+                session()->flash('error', 'Invalid Login Details');
+                return redirect()->back();
+            }
             return redirect()->to('voter/dashboard');
          
         } catch (\Throwable $th) {
@@ -343,6 +419,74 @@ Route::prefix('voter')->group(function(){
 
     // GOOGLE SOCIALITE
     Route::get('/auth/redirect', 'App\Http\Controllers\VoterSocialController@redirect');
+
+    // FORGET PASSWORD --RESET PASSWORD
+    Route::get('/password/request', function(){
+        return view('voter.password.request');
+    })->name('voterRequest');
+
+    Route::post('/password/request', function(Request $request){
+        $request->validate([
+            'email'=> 'required|email|exists:voters,email'
+        ]);
+
+        $token = Str::random(64);
+        DB::table('password_resets')->insert([
+            'email'=> $request->email,
+            'token'=>$token,
+            'created_at'=> Carbon::now()
+        ]);
+
+        $action_link= route('voter.password.reset', ['token'=>$token, 'email'=>$request->email]);
+        $body= "We have received a request to reset the password for <b> Global Talent</b> account associated with
+        ".$request->email." as a Voter. You can reset your password by clicking the link below";
+
+        Mail::send('voter.email_forgot', ['action_link'=>$action_link, 'body'=>$body], function($message) use ($request){
+            $message->from('agbesuaoluwatoyin96@gmail.com', 'Global Talent');
+            $message->to($request->email, 'Your name')
+                    ->subject('Reset Password');
+        });
+        
+
+        return back()->with('success', 'We have e-mailed your password reset link!');
+    })->name('voter_send_password');
+
+    Route::get('/password/reset/{token}', function(Request $request, $token=null){
+        return view('voter.password.reset')->with(['token'=>$token, 'email'=>$request->email]);
+    })->name('voter.password.reset');
+
+    Route::post('/password/reset', function(Request $request){
+        $request->validate([
+            'email'=>'required|email|exists:voters,email',
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required'
+        ]);
+
+        $check_token = DB::table('password_resets')->where([
+            'email'=>$request->email,
+            'token'=>$request->token,
+        ])->first();
+
+        if(!$check_token){
+            return back()->withInput()->with('fail', 'Invalid Token');
+        }else{
+            Voter::where('email', $request->email)->update([
+                'password'=> Hash::make($request->password)
+            ]);
+
+            DB::table('password_resets')->where([
+                'email'=>$request->email
+            ])->delete();
+            
+            return redirect()->to('voter/login')
+            ->with('info', 'Your password has been changed! You can now login with the new password')
+            ->with(['verifiedEmail'=>$request->email]);
+        }
+    })->name('contestantResetPassword');
+
+    // END FORGET PASSWORD --RESET PASSWORD
+
+
 
     // DASHBORAD
     Route::get('/dashboard', function(){
@@ -394,7 +538,7 @@ Route::prefix('contestant')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required|min:8|max:12",
+            "password"=>"required|min:8",
             "phone"=>"required"
         ]);
         
@@ -409,7 +553,6 @@ Route::prefix('contestant')->group(function(){
                 'password'=>Hash::make($request->password),
                 'image'=>0
             ]);
-            var_dump($contestant);
             Auth::guard('contestant')->loginUsingId($contestant->id);
             return redirect('contestant/login');
         } catch (\Throwable $th) {
@@ -432,6 +575,11 @@ Route::prefix('contestant')->group(function(){
         try {
             $token = Auth::guard('contestant')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
             $contestant = auth()->guard('contestant')->user();
+
+            if(!$token){
+                session()->flash('error', 'Invalid Login Details');
+                return redirect()->back();
+            }
             return redirect()->to('contestant/dashboard');
          
         } catch (\Throwable $th) {
@@ -439,6 +587,73 @@ Route::prefix('contestant')->group(function(){
             return redirect()->back();
         }   
     })->name('contestantLogin');
+
+    // FORGET PASSWORD --RESET PASSWORD
+    Route::get('/password/request', function(){
+        return view('contestant.password.request');
+    })->name('contestantRequest');
+
+    Route::post('/password/request', function(Request $request){
+        $request->validate([
+            'email'=> 'required|email|exists:contestants,email'
+        ]);
+
+        $token = Str::random(64);
+        DB::table('password_resets')->insert([
+            'email'=> $request->email,
+            'token'=>$token,
+            'created_at'=> Carbon::now()
+        ]);
+
+        $action_link= route('contestant.password.reset', ['token'=>$token, 'email'=>$request->email]);
+        $body= "We have received a request to reset the password for <b> Global Talent</b> account associated with
+        ".$request->email." as a Contestant. You can reset your password by clicking the link below";
+
+        Mail::send('contestant.email_forgot', ['action_link'=>$action_link, 'body'=>$body], function($message) use ($request){
+            $message->from('agbesuaoluwatoyin96@gmail.com', 'Global Talent');
+            $message->to($request->email, 'Your name')
+                    ->subject('Reset Password');
+        });
+        
+
+        return back()->with('success', 'We have e-mailed your password reset link!');
+    })->name('contestant_send_password');
+
+    Route::get('/password/reset/{token}', function(Request $request, $token=null){
+        return view('contestant.password.reset')->with(['token'=>$token, 'email'=>$request->email]);
+    })->name('contestant.password.reset');
+
+    Route::post('/password/reset', function(Request $request){
+        $request->validate([
+            'email'=>'required|email|exists:contestants,email',
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required'
+        ]);
+
+        $check_token = DB::table('password_resets')->where([
+            'email'=>$request->email,
+            'token'=>$request->token,
+        ])->first();
+
+        if(!$check_token){
+            return back()->withInput()->with('fail', 'Invalid Token');
+        }else{
+            Contestant::where('email', $request->email)->update([
+                'password'=> Hash::make($request->password)
+            ]);
+
+            DB::table('password_resets')->where([
+                'email'=>$request->email
+            ])->delete();
+            
+            return redirect()->to('contestant/login')
+            ->with('info', 'Your password has been changed! You can now login with the new password')
+            ->with(['verifiedEmail'=>$request->email]);
+        }
+    })->name('voterResetPassword');
+
+    // END FORGET PASSWORD --RESET PASSWORD
+
 
     // DASHBORAD
     Route::get('/dashboard', function(){

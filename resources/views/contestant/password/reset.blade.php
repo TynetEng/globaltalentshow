@@ -10,44 +10,36 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-    <title>Document</title>
+    <title>Reset Password</title>
 </head>
 <body>
     <div class="parent">
         <div class="card card-body">
 
-            <div class="cont text-center">
-                <a href="#" class="navbar-brand">
-                    <img src="../image/Global Talent.png" alt="">
-                </a>
-            </div>
             <div class="text-center">
-                <h4> Admin login</h4>
+                <h4>Contestant Reset Password</h4>
             </div>
-            <form action="{{route('adminLogin')}}" method="post">
-                @if($su=Session::get('error'))
-                    <div class="alert alert-danger  alert-dismissible fade show d-flex justify-content-between"  role="alert">
-                        <strong>{{$su}}</strong>
-                        <button type="button" class="close border-0" data-dismiss="alert" aria-label="Close" style="background-color: transparent">
-                            <span aria-hidden="true" style="font-weight: bolder">×</span>
-                        </button>
-                    </div>
-                @endif 
-                
-                @if (session('info'))
+            <form action="{{route('contestantResetPassword')}}" method="post">
+                @if (session('success'))
                     <div class="alert alert-success" role="alert">
-                        {{session('info')}}
+                        {{session('success')}}
+                    </div>
+                @endif
+                @if (session('fail'))
+                    <div class="alert alert-danger" role="alert">
+                        {{session('fail')}}
                     </div>
                 @endif
 
-                <div>
+                <input type="hidden" name='token' value="{{$token}}">
+                <div class="form-group">
                     <label for="">Email</label>
-                    <input type="text" name="email" value="{{$verifiedEmail ?? old('emaill')}}" placeholder="mail@website.com" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
+                    <input type="text" name="email" value="{{ $email ?? old('emaill')}}" placeholder="mail@website.com" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
@@ -55,23 +47,20 @@
                     @enderror
                 </div>
 
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <input type="checkbox" id="remember">
-                        <label for="remember" class="rmb">Remember me</label for="remember">
-                    </div>
-                    <div>
-                        <a href="{{route('adminRequest')}}" class="text-decoration-none">Forgot password?</a>
-                    </div>
+                <div class="form-group">
+                    <label for="">Confirm Password</label>
+                    <input type="password" value="{{old('password_confirmation')}}" placeholder="Min. 8 characters" name="password_confirmation" class="form-control @error('password_confirmation') is-inavlid @enderror">
+                    @error('password_confirmation')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
                 </div>
                 @csrf
                 <div class="logg">
-                    <button type="submit">LOGIN</button>
+                    <button type="submit">Reset Password</button>
                 </div>
+                <a href="{{route('contestantLogin')}}">Login</a>
             </form>
-            <footer class="text-center">
-                <p>Not registered yet? <span><a href="./signup" class="text-decoration-none">Create an account</a></span></p>
-            </footer>
+            
         </div>
         
     </div>
