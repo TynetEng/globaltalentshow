@@ -12,7 +12,7 @@
 </head>
 <body>
     <div>
-        @include('include.voterNav')
+        @include('include.contestantNav')
     </div>
     <div class="container-fluid">
         

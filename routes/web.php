@@ -164,6 +164,17 @@ Route::prefix('admin')->group(function(){
     })->name('adminResetPassword');
 
     // END FORGET PASSWORD --RESET PASSWORD
+
+    // ADMIN LOGOUT
+    Route::get('/logout', function(Request $request){
+        auth()->guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('admin/login')
+        ->with('log', "You've successfully logout! Enter your details to login");
+    })->name('adminLogout');
+
     
     // DASHBOARD
     Route::get('/dashboard', function(){
@@ -404,7 +415,7 @@ Route::prefix('voter')->group(function(){
         try {
             $token = Auth::guard('voter')->attempt(['email'=>$request->email, 'password'=>$request->password],true);
             $voter = auth()->guard('voter')->user();
-            
+
             if(!$token){
                 session()->flash('error', 'Invalid Login Details');
                 return redirect()->back();
@@ -486,7 +497,15 @@ Route::prefix('voter')->group(function(){
 
     // END FORGET PASSWORD --RESET PASSWORD
 
+    // VOTER LOGOUT
+    Route::get('/logout', function(Request $request){
+        auth()->guard('voter')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
+        return redirect('voter/login')
+        ->with('log', "You've successfully logout! Enter your details to login");
+    })->name('voterLogout');
 
     // DASHBORAD
     Route::get('/dashboard', function(){
@@ -653,6 +672,16 @@ Route::prefix('contestant')->group(function(){
     })->name('voterResetPassword');
 
     // END FORGET PASSWORD --RESET PASSWORD
+
+     // CONTESTANT LOGOUT
+     Route::get('/logout', function(Request $request){
+        auth()->guard('contestant')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('contestant/login')
+        ->with('log', "You've successfully logout! Enter your details to login");
+    })->name('contestantLogout');
 
 
     // DASHBORAD

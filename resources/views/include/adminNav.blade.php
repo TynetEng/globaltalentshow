@@ -102,7 +102,7 @@
                             </a>
                         </div>
                         <div class="board">
-                            <a href="">
+                            <a href="{{route('adminLogout')}}">
                                 <div>
                                     <i class="fa fa-sign-out"></i>
                                 </div>

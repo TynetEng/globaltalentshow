@@ -37,11 +37,20 @@
                     </div>
                 @endif 
                 
+                {{-- ALERT FOR SUCCESSFUL RESET PASSWORD --}}
                 @if (session('info'))
                     <div class="alert alert-success" role="alert">
                         {{session('info')}}
                     </div>
                 @endif
+                
+                {{-- ALERT FOR LOGOUT --}}
+                @if (session('log'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('log')}}
+                    </div>
+                @endif
+
 
                 <div>
                     <label for="">Email</label>

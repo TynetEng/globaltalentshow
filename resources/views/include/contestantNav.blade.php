@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -46,19 +48,19 @@
                                         <i class="fa fa-search"></i>
                                     </div>
                                     <li class="nav-items">
-                                        <a href="/voter/dashboard" class="nav-link">
+                                        <a href="/contestant/dashboard" class="nav-link">
                                             <span></span>
                                             <span>DASHBOARD</span>
                                         </a>
                                     </li>
                                     <li class="nav-items">
-                                        <a href="/voter/login" class="nav-link">
+                                        <a href="/contestant/login" class="nav-link">
                                             <span></span>
                                             <span>LOGIN</span>
                                         </a>
                                     </li>
                                     <li class="nav-items">
-                                        <a href="{{route('voterLogout')}}" class="nav-link">
+                                        <a href="{{route('contestantLogout')}}" class="nav-link">
                                             <span></span>
                                             <span>LOGOUT</span>
                                         </a>
@@ -70,19 +72,19 @@
                     <div class="sideBar">
                         <ul class="navbar-nav">
                             <li class="nav-items">
-                                <a href="/voter/dashboard" class="nav-link">
+                                <a href="/contestant/dashboard" class="nav-link">
                                     <span></span>
                                     <span>DASHBOARD</span>
                                 </a>
                             </li>
                             <li class="nav-items">
-                                <a href="/voter/login" class="nav-link">
+                                <a href="/contestant/login" class="nav-link">
                                     <span></span>
                                     <span>LOGIN</span>
                                 </a>
                             </li>
                             <li class="nav-items">
-                                <a href="{{route('voterLogout')}}" class="nav-link">
+                                <a href="{{route('contestantLogout')}}" class="nav-link">
                                     <span></span>
                                     <span>LOGOUT</span>
                                 </a>
