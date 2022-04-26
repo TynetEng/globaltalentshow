@@ -28,38 +28,45 @@
                     </div>
                 @endif
 
-                <div>
+                <div class="form-group">
                     <label for="">First Name</label>
                     <input type="text" placeholder="First Name" name="fName" value="{{old('fName')}}" class="form-control {{$errors->has('fName') ? 'is-inavlid' : '' }}">
                     @error('fName')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="">Last Name</label>
                     <input type="text" placeholder="Last Name" name="lName" value="{{old('lName')}}" class="form-control {{$errors->has('lName') ? 'is-inavlid' : '' }}">
                     @error('lName')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="">Email</label>
                     <input type="text"  placeholder="mail@website.com" name="email" value="{{old('email')}}" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="">Phone Number</label>
                     <input type="text" placeholder="0**********" name="phone" value="{{old('phone')}}" class="form-control {{$errors->has('phone') ? 'is-inavlid' : '' }}">
                     @error('phone')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" placeholder="Min. 8 characters" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="">Confirm Password</label>
+                    <input type="password" value="{{old('password_confirmation')}}" placeholder="Min. 8 characters" name="password_confirmation" class="form-control @error('password_confirmation') is-inavlid @enderror">
+                    @error('password_confirmation')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
@@ -96,7 +103,6 @@
         .parent{
             margin: auto;
             width: 30%;
-            margin-top: 2%;
             box-shadow: 2px 2px 2px 0px rgb(128, 127, 127);
         }
         img{

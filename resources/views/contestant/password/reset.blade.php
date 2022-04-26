@@ -39,6 +39,7 @@
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
+                
                 <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">

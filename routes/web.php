@@ -47,7 +47,8 @@ Route::prefix('admin')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required|min:8",
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required',
             "phone"=>"required"
         ]);
 
@@ -378,7 +379,8 @@ Route::prefix('voter')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required|min:8",
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required',
             "phone"=>"required"
         ]);
         
@@ -557,7 +559,8 @@ Route::prefix('contestant')->group(function(){
             'email'=>"email|required|unique:users",
             'fName'=>"required",
             'lName'=>"required",
-            "password"=>"required|min:8",
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required',
             "phone"=>"required"
         ]);
         
