@@ -210,10 +210,10 @@ Route::prefix('admin')->group(function(){
 
     Route::post('/contestant', function(Request $request) {
         $request->validate([
-            'contName'=>"required",
-            'contInfo'=>"required",
+            'contestant_name'=>"required",
+            'contestant_information'=>"required",
             'image'=>"required|mimes:png,jpg,jpeg|max:5048",
-            'contEmail'=>'required|email',
+            'contestant_email'=>'required|email',
             'code'=>'required'
         ]);
         
@@ -227,10 +227,10 @@ Route::prefix('admin')->group(function(){
                 $show= $request->image->move(public_path('images'), $path);
 
                 $details= DB::table('contestantDetails')->insert([
-                    'name'=>$request->contName,
-                    'information'=>$request->contInfo,
+                    'name'=>$request->contestant_name,
+                    'information'=>$request->contestant_information,
                     'image'=>$path,
-                    'contestantEmail'=>$request->contEmail,
+                    'contestantEmail'=>$request->contestant_email,
                     'trackingNumber'=>$request->code,
                     'created_at' =>now(),
                     'updated_at' => null
@@ -279,9 +279,9 @@ Route::prefix('admin')->group(function(){
        if($validateAdmin){
             try {        
                 $data= Contestantdetail::find($request->id);
-                $data->name=$request->contName;
-                $data->information=$request->contInfo;
-                $data->contestantEmail=$request->contEmail;
+                $data->name=$request->contestant_name;
+                $data->information=$request->contestant_information;
+                $data->contestantEmail=$request->contestant_email;
                 $data->updated_at=now();
                 $data->trackingNumber=$request->code;
                 $data->created_at= $i->created_at;

@@ -110,22 +110,22 @@
                                     @endif  
                                     <div class="form-group">
                                         <label for="">Contestant's Name</label>
-                                        <input type="text" class="form-control @error('contName') is-inavlid @enderror" name="contName"   value="{{old('contName')}}">
-                                        @error('contName')
+                                        <input type="text" class="form-control @error('contestant_name') is-inavlid @enderror" name="contestant_name"   value="{{old('contestant_name')}}">
+                                        @error('contestant_name')
                                             <small class="text-danger">{{$message}}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="">Contestant's Email</label>
-                                        <input type="text" class="form-control @error('contEmail') is-inavlid @enderror" name="contEmail"   value="{{old('contEmail')}}">
-                                        @error('contEmail')
+                                        <input type="text" class="form-control @error('contestant_email') is-inavlid @enderror" name="contestant_email"   value="{{old('contestant_email')}}">
+                                        @error('contestant_email')
                                             <small class="text-danger">{{$message}}</small>
                                         @enderror
                                     </div>
                                     <div class="py-2">
                                         <label for="">Contestant's Information</label>
-                                        <textarea name="contInfo" rows="5"></textarea>
-                                        @error('contInfo')
+                                        <textarea name="contestant_information" rows="5"></textarea>
+                                        @error('contestant_information')
                                             <small class="text-danger">{{$message}}</small>
                                         @enderror
                                     </div>
