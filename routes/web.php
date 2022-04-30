@@ -44,22 +44,21 @@ Route::prefix('admin')->group(function(){
 
     Route::post('/signup', function (Request $request) {
         $request->validate([
-            'email'=>"email|required|unique:users",
-            'fName'=>"required",
-            'lName'=>"required",
+            'email'=>"email|required|unique:admins",
+            'first_name'=>"required",
+            'last_name'=>"required",
             'password'=>'required|min:5|confirmed',
             'password_confirmation'=>'required',
-            "phone"=>"required"
+            "phone_number"=>"required|min:11|max:11"
         ]);
-
+        
         try {
             $admin= Admin::create([
-                'firstName'=> $request->fName,
-                'lastName'=> $request->lName,
+                'firstName'=> $request->first_name,
+                'lastName'=> $request->last_name,
                 'email'=> $request->email,
-                'phoneNumber'=> $request->phone,
+                'phoneNumber'=> $request->phone_number,
                 'password'=>Hash::make($request->password),
-                'image'=>0,
             ]);
             
             Auth::guard('admin')->loginUsingId($admin->id);
@@ -380,23 +379,21 @@ Route::prefix('voter')->group(function(){
 
     Route::post('/signup', function (Request $request) {
         $request->validate([
-            'email'=>"email|required|unique:users",
-            'fName'=>"required",
-            'lName'=>"required",
+            'email'=>"email|required|unique:voters",
+            'first_name'=>"required",
+            'last_name'=>"required",
             'password'=>'required|min:5|confirmed',
             'password_confirmation'=>'required',
-            "phone"=>"required"
+            "phone_number"=>"required|min:11|max:11"
         ]);
         
         try {
             $voter= Voter::create([
-                'firstName'=> $request->fName,
-                'lastName'=> $request->lName,
+                'firstName'=> $request->first_name,
+                'lastName'=> $request->last_name,
                 'email'=> $request->email,
-                'phoneNumber'=> $request->phone,
+                'phoneNumber'=> $request->phone_number,
                 'password'=>Hash::make($request->password),
-                'image'=>0,
-                'google_id'=>''
             ]);
             
             Auth::guard('voter')->loginUsingId($voter->id);
@@ -560,24 +557,23 @@ Route::prefix('contestant')->group(function(){
 
     Route::post('/signup', function (Request $request) {
         $request->validate([
-            'email'=>"email|required|unique:users",
-            'fName'=>"required",
-            'lName'=>"required",
+            'email'=>"email|required|unique:contestants|exists:contestantdetails,contestantEmail",
+            'first_name'=>"required",
+            'last_name'=>"required",
             'password'=>'required|min:5|confirmed',
             'password_confirmation'=>'required',
-            "phone"=>"required"
+            "phone_number"=>"required|min:11|max:11"
         ]);
         
         try {
             // $a = Contestant::first();
             // dd($a);
             $contestant= Contestant::create([
-                'firstName'=> $request->fName,
-                'lastName'=> $request->lName,
+                'firstName'=> $request->first_name,
+                'lastName'=> $request->last_name,
                 'email'=> $request->email,
-                'phoneNumber'=> $request->phone,
+                'phoneNumber'=> $request->phone_number,
                 'password'=>Hash::make($request->password),
-                'image'=>0
             ]);
             Auth::guard('contestant')->loginUsingId($contestant->id);
             return redirect('contestant/login');

@@ -30,15 +30,15 @@
 
                 <div class="form-group">
                     <label for="">First Name</label>
-                    <input type="text" placeholder="First Name" name="fName" value="{{old('fName')}}" class="form-control {{$errors->has('fName') ? 'is-inavlid' : '' }}">
-                    @error('fName')
+                    <input type="text" placeholder="First Name" name="first_name" value="{{old('first_name')}}" class="form-control {{$errors->has('first_name') ? 'is-inavlid' : '' }}">
+                    @error('first_name')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Last Name</label>
-                    <input type="text" placeholder="Last Name" name="lName" value="{{old('lName')}}" class="form-control {{$errors->has('lName') ? 'is-inavlid' : '' }}">
-                    @error('lName')
+                    <input type="text" placeholder="Last Name" name="last_name" value="{{old('last_name')}}" class="form-control {{$errors->has('last_name') ? 'is-inavlid' : '' }}">
+                    @error('last_name')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="form-group">
                     <label for="">Phone Number</label>
-                    <input type="text" placeholder="0**********" name="phone" value="{{old('phone')}}" class="form-control {{$errors->has('phone') ? 'is-inavlid' : '' }}">
-                    @error('phone')
+                    <input type="text" placeholder="0**********" name="phone_number" value="{{old('phone_number')}}" class="form-control {{$errors->has('phone_number') ? 'is-inavlid' : '' }}">
+                    @error('phone_number')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
