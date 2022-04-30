@@ -9,7 +9,7 @@
 
 .no{
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 .data{
@@ -43,5 +43,9 @@
 @media(max-width:760px){
     .exp{
         display: none !important;
+    }
+    .pad1, .pad2, .pad3, .pad4{
+        margin-left: 10px !important;
+        width: 93% !important;
     }
 }

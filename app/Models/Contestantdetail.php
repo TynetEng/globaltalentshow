@@ -14,6 +14,7 @@ class Contestantdetail extends Model
         'name',
         'information',
         'phoneNumber',
+        'contestantEmail',
         'image',
         'trackingNumber',
     ];

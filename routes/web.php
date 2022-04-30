@@ -117,7 +117,7 @@ Route::prefix('admin')->group(function(){
             'created_at'=> Carbon::now()
         ]);
 
-        $action_link= route('password.reset', ['token'=>$token, 'email'=>$request->email]);
+        $action_link= route('admin.password.reset', ['token'=>$token, 'email'=>$request->email]);
         $body= "We have received a request to reset the password for <b> Global Talent</b> account associated with
         ".$request->email." as an Admin. You can reset your password by clicking the link below";
 
@@ -214,6 +214,7 @@ Route::prefix('admin')->group(function(){
             'contName'=>"required",
             'contInfo'=>"required",
             'image'=>"required|mimes:png,jpg,jpeg|max:5048",
+            'contEmail'=>'required|email',
             'code'=>'required'
         ]);
         
@@ -230,14 +231,16 @@ Route::prefix('admin')->group(function(){
                     'name'=>$request->contName,
                     'information'=>$request->contInfo,
                     'image'=>$path,
+                    'contestantEmail'=>$request->contEmail,
                     'trackingNumber'=>$request->code,
                     'created_at' =>now(),
-                    'updated_at' => now()
+                    'updated_at' => null
                 ]);    
+                
             }
             if($details){
                 session()->flash('success', 'Contestant details updated successfully');
-                return redirect('admin.contestant');
+                return redirect('admin/contestant');
             }
         } catch (\Throwable $th) {
             session()->flash('error', 'Invalid Login Details');
@@ -279,6 +282,7 @@ Route::prefix('admin')->group(function(){
                 $data= Contestantdetail::find($request->id);
                 $data->name=$request->contName;
                 $data->information=$request->contInfo;
+                $data->contestantEmail=$request->contEmail;
                 $data->updated_at=now();
                 $data->trackingNumber=$request->code;
                 $data->created_at= $i->created_at;
@@ -328,7 +332,7 @@ Route::prefix('admin')->group(function(){
             ->delete();
 
             echo session()->flash('success', 'Contestant details deleted successfully');
-            return redirect('admin/contestant');
+            return redirect('admin.contestant');
        } catch (\Throwable $th) {
            //throw $th;
        }

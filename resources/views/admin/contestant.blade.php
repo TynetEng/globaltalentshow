@@ -99,7 +99,7 @@
                                 <button class="close" onclick="exitForm()"><i class="fa fa-close"></i></button>
                             </div>
                             <div class="inner">
-                                <form action="{{url('contestantForm')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('contestantForm')}}" method="POST" enctype="multipart/form-data">
                                     @if($su=Session::get('error'))
                                         <div class="alert alert-danger  alert-dismissible fade show"  role="alert">
                                             <strong>{{$su}}</strong>
@@ -108,10 +108,17 @@
                                             </button>
                                         </div>
                                     @endif  
-                                    <div>
+                                    <div class="form-group">
                                         <label for="">Contestant's Name</label>
                                         <input type="text" class="form-control @error('contName') is-inavlid @enderror" name="contName"   value="{{old('contName')}}">
                                         @error('contName')
+                                            <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Contestant's Email</label>
+                                        <input type="text" class="form-control @error('contEmail') is-inavlid @enderror" name="contEmail"   value="{{old('contEmail')}}">
+                                        @error('contEmail')
                                             <small class="text-danger">{{$message}}</small>
                                         @enderror
                                     </div>

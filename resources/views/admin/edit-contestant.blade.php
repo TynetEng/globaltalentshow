@@ -41,10 +41,17 @@
                                         </div>
                                     @endif  
                                     <input type="hidden" name="id" value="{{$dataa->id}}">
-                                    <div>
+                                    <div class="form-group">
                                         <label for="">Contestant's Name</label>
                                         <input type="text" class="form-control @error('contName') is-inavlid @enderror" name="contName"   value="{{$dataa->name}}">
                                         @error('contName')
+                                            <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Contestant's Email</label>
+                                        <input type="text" class="form-control @error('contEmail') is-inavlid @enderror" name="contEmail"   value="{{$dataa->contestantEmail}}">
+                                        @error('contEmail')
                                             <small class="text-danger">{{$message}}</small>
                                         @enderror
                                     </div>

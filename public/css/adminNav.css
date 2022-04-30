@@ -3,7 +3,7 @@ canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container
 #particles-js{ 
     position:absolute; 
     width: 100%;
-    height: 1200px !important;
+    height: 2200px !important;
     min-height: fit-content;
     max-height: fit-content !important;
     background-color: black; 
@@ -143,5 +143,8 @@ aside{
     .imgg{
         width: 80%; 
         margin-top: 13%;
+    }
+    #particles-js{ 
+        height: 4550px !important;
     }
 }

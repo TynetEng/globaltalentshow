@@ -58,7 +58,7 @@
                 <div class="logg">
                     <button type="submit">Reset Password</button>
                 </div>
-                <a href="{{route('adminLogin')}}">Login</a>
+                <a href="{{route('adminLogin')}}" class="text-decoration-none text-center font-weight-bold">Login</a>
             </form>
             
         </div>

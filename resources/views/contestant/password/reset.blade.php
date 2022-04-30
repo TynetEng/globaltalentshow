@@ -39,7 +39,7 @@
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                
+
                 <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
@@ -59,7 +59,7 @@
                 <div class="logg">
                     <button type="submit">Reset Password</button>
                 </div>
-                <a href="{{route('contestantLogin')}}">Login</a>
+                <a href="{{route('contestantLogin')}}" class="text-decoration-none text-center font-weight-bold">Login</a>
             </form>
             
         </div>

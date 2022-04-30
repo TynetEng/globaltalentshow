@@ -51,14 +51,14 @@
                     </div>
                 @endif
 
-                <div>
+                <div class="form-group">
                     <label for="">Email</label>
                     <input type="text" name="email" value="{{$verifiedEmail ?? old('emaill')}}" placeholder="mail@website.com" class="form-control {{$errors->has('email') ? 'is-inavlid' : '' }}">
                     @error('email')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
