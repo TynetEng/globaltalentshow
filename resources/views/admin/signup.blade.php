@@ -97,8 +97,10 @@
     </div>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caladea&display=swap');
         body{
             background-color: black;
+            font-family: 'Caladea';
         }
         .parent{
             margin: auto;

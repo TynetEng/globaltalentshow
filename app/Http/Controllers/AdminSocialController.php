@@ -33,12 +33,15 @@ public function callback()
                 // return "hi";
                 Auth::guard('admin')->login($findAdmin);
                 $admin = auth()->guard('admin')->user();
+                return "heelo";
                 return redirect('/admin/dashboard');
             }
             elseif($duplicateEmail){
-
+                Auth::guard('admin')->login($findAdmin);
+                $admin = auth()->guard('admin')->user();
+                return "hi";
+                return redirect('/admin/dashboard');
             }else{
-                return "hello";
                 $newUser = Admin::insert([
                     'firstName' => $user->user['given_name'],
                     'lastName' => $user->user['family_name'],

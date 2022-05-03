@@ -133,8 +133,10 @@
 </html>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caladea&display=swap');
     html,body{ 
         margin: 0px;
+        font-family: 'Caladea';
     }
     .container-fluid{
         padding: 0px;

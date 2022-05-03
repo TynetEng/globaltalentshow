@@ -15,9 +15,6 @@
         @include('include.voterNav')
     </div>
     <div class="container-fluid">
-        {{-- <div>
-            <div id="space" class="space"></div>
-        </div> --}}
         <div class="container">
             <div class="parent">
                 <div class="fillGroup">

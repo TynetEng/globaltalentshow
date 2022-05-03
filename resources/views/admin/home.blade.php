@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url('/css/welcome.css')}}">
+    <link rel="stylesheet" href="{{url('/css/adminHome.css')}}">
     <title>Document</title>
 </head>
 <body>
@@ -37,28 +37,19 @@
 
                                 </div>
                             </div>
-                            <div class="row hay">
-                                <div class="col-sm-3 card card-body shade">
+                            <div class="">
+                                <div class=" card card-body shade">
                                     <h4 class="text-center">Admin</h4>
                                     <p>As an admin, you must be registered and authorized by the organization <b>Global Talent</b>.</p>
                                     <div class="bot">
-                                        <a href="/admin">Get started as an Admin</a>
+                                        <a href="/admin/signup">Signup as an Admin</a>
+                                    </div>
+                                    <div class="bot my-3">
+                                        <a href="/admin/dashboard">Go to dashboard</a>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 card card-body shade">
-                                    <h4 class="text-center">Contestant</h4>
-                                    <p>As a contestant, you must be registered and authorized by the <b>Global Talent Admin</b>.</p>
-                                    <div class="bot">
-                                        <a href="/contestant">Get started as a Contestant</a>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 card card-body shade">
-                                    <h4 class="text-center">Voter</h4>
-                                    <p>As a voter, you are solely obliged to vote for your choice of contestant.</p>
-                                    <div class="bot">
-                                        <a href="/voter">Get started as a Voter</a>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>

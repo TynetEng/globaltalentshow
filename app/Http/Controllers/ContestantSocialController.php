@@ -45,7 +45,7 @@ public function callback()
                     'remember_token'=>'',
                     'created_at'=>now()
                 ]);
-                return 'hello';
+                
                 
                 Auth::guard('contestant')->login($newUser);
                 $contestant = auth()->guard('contestant')->user();

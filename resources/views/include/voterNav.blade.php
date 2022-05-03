@@ -106,8 +106,10 @@
 </html>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caladea&display=swap');
     html,body{ 
         margin: 0px;
+        font-family: 'Caladea';
     }
     .container-fluid{
         padding: 0px;
@@ -118,7 +120,7 @@
         top: -10% !important;
         margin: 0;
         z-index: 100;
-        border-bottom: 3px solid #5F0F40;
+        border-bottom: 3px solid rgb(154, 3, 30);
         align-items: center;
         background-color: white;
     }
@@ -195,7 +197,7 @@
             color: white;
         }
         .bell:focus{
-            border: 2px solid red !important;
+            border: 2px solid rgb(154, 3, 30) !important;
             border-radius: 1%;
             transform: rotate(180deg);
             transform: 0.5s;

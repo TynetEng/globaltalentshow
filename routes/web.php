@@ -36,7 +36,12 @@ Route::get('/', function () {
 
 // ADMIN
 Route::prefix('admin')->group(function(){
-    
+
+    // HOME
+    Route::get('/', function () {
+        return view('admin.home');
+    });
+
     // SIGNUP
     Route::get('/signup', function () {
         return view('admin.signup');
@@ -188,6 +193,9 @@ Route::prefix('admin')->group(function(){
         ->where('id', $validateAdmin)
         ->get();
 
+        $totalContestant= DB::table('contestantdetails')->get();
+        // dd($totalContestant);
+
         return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
 
@@ -214,7 +222,7 @@ Route::prefix('admin')->group(function(){
             'contestant_information'=>"required",
             'image'=>"required|mimes:png,jpg,jpeg|max:5048",
             'contestant_email'=>'required|email',
-            'code'=>'required'
+            'code'=>'required|unique:contestantdetails'
         ]);
         
         try {
@@ -372,6 +380,11 @@ Route::prefix('admin')->group(function(){
 // VOTERS
 
 Route::prefix('voter')->group(function(){
+    // HOME
+    Route::get('/', function () {
+        return view('voter.home');
+    });
+
     // SIGNUP
     Route::get('/signup', function () {
         return view('voter.signup');
@@ -546,6 +559,10 @@ Route::prefix('voter')->group(function(){
 
 // CONTESTANT
 Route::prefix('contestant')->group(function(){
+    // HOME
+    Route::get('/', function () {
+        return view('contestant.home');
+    });
 
      // GOOGLE SOCIALITE
     Route::get('/auth/redirect', 'App\Http\Controllers\ContestantSocialController@redirect');

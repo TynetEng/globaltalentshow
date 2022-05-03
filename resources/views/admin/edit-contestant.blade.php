@@ -27,8 +27,14 @@
                 <div>
                     <div>
                         <div class="panel">
-                            <div>
-                                <button class="close" onclick="exitForm()"><i class="fa fa-close"></i></button>
+                            
+                            <div class="d-flex align-items-center justify-content-between">
+                                <button class="border-0" onclick="history.back()" style="background-color: transparent">
+                                    <i class="fa fa-arrow-left"></i>
+                                </button>
+                                <div>
+                                    <button class="close" onclick="exitForm()"><i class="fa fa-close"></i></button>
+                                </div>
                             </div>
                             <div class="inner">
                                 <form action="{{route('update')}}" method="POST" enctype="multipart/form-data">
@@ -38,6 +44,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
+                                            
                                         </div>
                                     @endif  
                                     <input type="hidden" name="id" value="{{$dataa->id}}">

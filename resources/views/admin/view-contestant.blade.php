@@ -24,7 +24,12 @@
         <div class="container">
             <div class="panel2">
                 <div>
-                    <h2 class="text-center">CONTESTANT {{$dataa->id}}</h2>
+                    <div class="">
+                        <button class="border-0" onclick="history.back()" style="background-color: transparent">
+                            <i class="fa fa-arrow-left"></i>
+                        </button>
+                        <h2 class="text-center">CONTESTANT {{$dataa->id}}</h2>
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <img id="imagg" src="{{asset('images/'.$dataa->image)}}">
