@@ -18,8 +18,10 @@ class ContestantDetails extends Migration
             $table->string('name');
             $table->string('information');
             $table->string('image');
+            $table->string('contestantEmail');
             $table->string('trackingNumber')->unique();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('created_at')->now();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
