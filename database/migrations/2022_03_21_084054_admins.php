@@ -18,7 +18,7 @@ class Admins extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('phoneNumber');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('google_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
