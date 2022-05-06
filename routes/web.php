@@ -194,8 +194,6 @@ Route::prefix('admin')->group(function(){
         ->get();
 
         $totalContestant= DB::table('contestantdetails')->get();
-        $user= DB::table('users')->get();
-        dd($user);
 
         return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
