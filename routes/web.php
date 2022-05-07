@@ -193,7 +193,7 @@ Route::prefix('admin')->group(function(){
         ->where('id', $validateAdmin)
         ->get();
 
-        $totalContestant= DB::table('contestantdetails')->get();
+        // $totalContestant= DB::table('contestantdetails')->get();
 
         return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
