@@ -27,14 +27,14 @@
                     <div class="container">
                         <div class="panel">
                             <div class="row headie">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 pt-5">
                                     <div>
                                         <h2>LET'S SHOWCASE YOUR FASCINATING TALENT TO THE WORLD</h2>
                                         <p>Global Talent easily manage your skills, talents, and gifts. And let the world know what've you got inside...</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-
+                                    <img src="{{asset('image/voter.png')}}" alt="">
                                 </div>
                             </div>
                             <div class="">
