@@ -56,13 +56,13 @@
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                {{-- <div class="form-group">
+                <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
-                </div> --}}
+                </div>
 
                 <div class="d-flex justify-content-between">
                     <div>
