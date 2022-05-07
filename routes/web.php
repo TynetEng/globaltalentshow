@@ -200,7 +200,7 @@ Route::prefix('admin')->group(function(){
 
     // CONTESTANT
     Route::get('/contestant', function(){
-        $cont = DB::table('contestantDetails')->get();
+        $cont = DB::table('contestant_details')->get();
         
         $validateAdmin = auth()->guard('admin')->user()->id;
 
