@@ -13,7 +13,7 @@ class VotePayments extends Migration
      */
     public function up()
     {
-        Schema::create('voterPayment', function (Blueprint $table) {
+        Schema::create('voterPayments', function (Blueprint $table) {
             $table->id();
             $table->string('contestantName');
             $table->string('modeOfPayment');
@@ -31,6 +31,6 @@ class VotePayments extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('voterPayment');
+        Schema::dropIfExists('voterPayments');
     }
 }

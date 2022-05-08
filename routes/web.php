@@ -193,14 +193,14 @@ Route::prefix('admin')->group(function(){
         ->where('id', $validateAdmin)
         ->get();
 
-        // $totalContestant= DB::table('contestantdetails')->get();
+        $totalContestant= DB::table('contestantDetails')->get();
 
         return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
 
     // CONTESTANT
     Route::get('/contestant', function(){
-        $cont = DB::table('contestant_details')->get();
+        $cont = DB::table('contestantDetails')->get();
         
         $validateAdmin = auth()->guard('admin')->user()->id;
 
