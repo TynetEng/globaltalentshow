@@ -76,4 +76,8 @@ h4{
     #particles-js{
         height: 1200px;
     }
+    .imagg{
+        margin: 0px !important;
+        width: 100%;
+    }
 }

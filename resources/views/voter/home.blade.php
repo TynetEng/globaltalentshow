@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="{{asset('image/voter.png')}}" alt="">
+                                    <img src="{{asset('image/voter.png')}}" alt="" class="imagg">
                                 </div>
                             </div>
                             <div class="">

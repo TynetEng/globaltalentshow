@@ -87,4 +87,8 @@ h4{
     .shade{
         width: 100% !important;
     }
+    .imagg{
+        margin: 0px !important;
+        width: 100%;
+    }
 }
