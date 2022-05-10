@@ -17,6 +17,7 @@ use App\Models\Voter;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,13 @@ Route::prefix('admin')->group(function(){
             'email'=>"email|required|unique:admins",
             'first_name'=>"required",
             'last_name'=>"required",
-            'password'=>'required|min:5|confirmed',
+            'password'=>['required', 'confirmed', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+            ],
             'password_confirmation'=>'required',
             "phone_number"=>"required|min:11|max:11"
         ]);
@@ -142,7 +149,13 @@ Route::prefix('admin')->group(function(){
     Route::post('/password/reset', function(Request $request){
         $request->validate([
             'email'=>'required|email|exists:admins,email',
-            'password'=>'required|min:5|confirmed',
+            'password'=>['required', 'confirmed', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+            ],
             'password_confirmation'=>'required'
         ]);
 
@@ -394,7 +407,13 @@ Route::prefix('voter')->group(function(){
             'email'=>"email|required|unique:voters",
             'first_name'=>"required",
             'last_name'=>"required",
-            'password'=>'required|min:5|confirmed',
+            'password'=>['required', 'confirmed', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+            ],
             'password_confirmation'=>'required',
             "phone_number"=>"required|min:11|max:11"
         ]);
@@ -484,7 +503,13 @@ Route::prefix('voter')->group(function(){
     Route::post('/password/reset', function(Request $request){
         $request->validate([
             'email'=>'required|email|exists:voters,email',
-            'password'=>'required|min:5|confirmed',
+            'password'=>['required', 'confirmed', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+            ],
             'password_confirmation'=>'required'
         ]);
 
@@ -576,7 +601,13 @@ Route::prefix('contestant')->group(function(){
             'email'=>"email|required|unique:contestants|exists:contestantdetails,contestantEmail",
             'first_name'=>"required",
             'last_name'=>"required",
-            'password'=>'required|min:5|confirmed',
+            'password'=>['required', 'confirmed', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+            ],
             'password_confirmation'=>'required',
             "phone_number"=>"required|min:11|max:11"
         ]);
@@ -664,7 +695,13 @@ Route::prefix('contestant')->group(function(){
     Route::post('/password/reset', function(Request $request){
         $request->validate([
             'email'=>'required|email|exists:contestants,email',
-            'password'=>'required|min:5|confirmed',
+            'password'=>['required', 'confirmed', Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+            ],
             'password_confirmation'=>'required'
         ]);
 

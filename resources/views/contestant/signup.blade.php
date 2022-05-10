@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" placeholder="Min. 8 characters" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <input type="password" placeholder="Password must have min. of 8 characters with at least one letter, number, symbol" value="{{old('password')}}"  name="password" class="form-control @error('password') is-inavlid @enderror">
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
