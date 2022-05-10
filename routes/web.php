@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function(){
 
     Route::post('/signup', function (Request $request) {
         $request->validate([
-            'email'=>"email|required|unique:admins",
+            'email'=>"email|required|unique:admins,email",
             'first_name'=>"required",
             'last_name'=>"required",
             'password'=>['required', 'confirmed', Password::min(8)
@@ -234,7 +234,7 @@ Route::prefix('admin')->group(function(){
             'contestant_information'=>"required",
             'image'=>"required|mimes:png,jpg,jpeg|max:5048",
             'contestant_email'=>'required|email',
-            'code'=>'required'
+            'code'=>'required|unique:contestantDetails,trackingNumber'
         ]);
        
         try {
@@ -405,7 +405,7 @@ Route::prefix('voter')->group(function(){
 
     Route::post('/signup', function (Request $request) {
         $request->validate([
-            'email'=>"email|required|unique:voters",
+            'email'=>"email|required|unique:voters,email",
             'first_name'=>"required",
             'last_name'=>"required",
             'password'=>['required', 'confirmed', Password::min(8)
@@ -599,7 +599,7 @@ Route::prefix('contestant')->group(function(){
 
     Route::post('/signup', function (Request $request) {
         $request->validate([
-            'email'=>"email|required|unique:contestants|exists:contestantdetails,contestantEmail",
+            'email'=>"email|required|exists:contestantdetails,contestantEmail|unique:contestantdetails,contestantEmail",
             'first_name'=>"required",
             'last_name'=>"required",
             'password'=>['required', 'confirmed', Password::min(8)
@@ -612,7 +612,7 @@ Route::prefix('contestant')->group(function(){
             'password_confirmation'=>'required',
             "phone_number"=>"required|min:11|max:11"
         ]);
-        
+       
         try {
             // $a = Contestant::first();
             // dd($a);
