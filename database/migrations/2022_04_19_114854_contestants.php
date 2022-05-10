@@ -18,6 +18,7 @@ class Contestants extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('phoneNumber');
+            $table->string('trackingNumber');
             $table->string('image')->nullable();
             $table->string('google_id')->nullable();
             $table->string('email')->unique();

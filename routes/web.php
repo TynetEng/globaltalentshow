@@ -234,9 +234,9 @@ Route::prefix('admin')->group(function(){
             'contestant_information'=>"required",
             'image'=>"required|mimes:png,jpg,jpeg|max:5048",
             'contestant_email'=>'required|email',
-            'code'=>'required|unique:contestantdetails'
+            'code'=>'required'
         ]);
-        
+       
         try {
             $image = $request->image;
     
@@ -246,6 +246,7 @@ Route::prefix('admin')->group(function(){
                 $path= $gen . ".". $ext;
                 $show= $request->image->move(public_path('images'), $path);
 
+                
                 $details= DB::table('contestantDetails')->insert([
                     'name'=>$request->contestant_name,
                     'information'=>$request->contestant_information,
