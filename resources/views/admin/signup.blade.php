@@ -56,16 +56,22 @@
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="">Password</label>
-                    <input type="password" value="{{old('password')}}" placeholder="Password must have min. of 8 characters with at least one letter, number, symbol" name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <div class="d-flex inputContainer align-items-center form-group">
+                        <input type="password" class="inputt" value="{{old('password')}}" placeholder="Min. of 8 characters with at least one letter, number, symbol" name="password" class="form-control @error('password') is-inavlid @enderror">
+                        <i class="fa fa-eye" onclick="togglePassword(this)"></i>
+                    </div>
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Confirm Password</label>
-                    <input type="password" value="{{old('password_confirmation')}}" placeholder="Min. 8 characters" name="password_confirmation" class="form-control @error('password_confirmation') is-inavlid @enderror">
+                    <div class="d-flex inputContainer align-items-center form-group">
+                        <input type="password" class="inputtt" value="{{old('password_confirmation')}}" placeholder="Min. 8 characters" name="password_confirmation" class="form-control @error('password_confirmation') is-inavlid @enderror">
+                        <i class="fa fa-eye" onclick="toggleConfirmPassword(this)"></i>
+                    </div>
                     @error('password_confirmation')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
@@ -110,9 +116,23 @@
         img{
             width: 70%;   
         }
+        .toggle{
+
+        }
         .cont{
             display: flex;
             justify-content: center;
+        }
+        .inputContainer{
+            width: 100%;
+            border: 1px solid #CED4DA;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .inputt, .inputtt{
+            border: 0px;
+            outline: 0px;
+            width: 92%;
         }
         .logg{
             text-align: center;
@@ -165,5 +185,22 @@
             }
         }
     </style>
+
+    <script>
+        let display = document.querySelector('.inputt');
+        let display2 = document.querySelector('.inputtt');
+        
+        function togglePassword(params){
+            let result = display.getAttribute('type')==="password" ? "text" : "password";
+            display.setAttribute("type", result);
+            params.classList.toggle("fa-eye-slash");
+        }
+
+        function toggleConfirmPassword(params){
+            let result = display2.getAttribute('type')==="password" ? "text" : "password";
+            display2.setAttribute("type", result);
+            this.classList.toggle("fa-eye-slash");
+        }
+    </script>
 </body>
 </html>

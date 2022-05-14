@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -58,7 +59,10 @@
                 </div>
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
+                    <div class="d-flex inputContainer align-items-center form-group">
+                        <input type="password" class="inputt" value="{{old('password')}}" placeholder="Min. 8 characters" name="password" class="form-control @error('password') is-inavlid @enderror">
+                        <i class="fa fa-eye" onclick="togglePassword(this)"></i>
+                    </div>
                     @error('password')
                         <small class="text-danger">{{$message}}</small>
                     @enderror
@@ -100,6 +104,17 @@
         img{
             width: 70%;   
         }
+        .inputContainer{
+            width: 100%;
+            border: 1px solid #CED4DA;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .inputt{
+            border: 0px;
+            outline: 0px;
+            width: 92%;
+        }
         .cont{
             display: flex;
             justify-content: center;
@@ -129,5 +144,15 @@
             }
         }
     </style>
+
+    <script>
+        let display = document.querySelector('.inputt');
+        
+        function togglePassword(params){
+            let result = display.getAttribute('type')==="password" ? "text" : "password";
+            display.setAttribute("type", result);
+            params.classList.toggle("fa-eye-slash");
+        }
+    </script>
 </body>
 </html>

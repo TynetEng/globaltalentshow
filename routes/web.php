@@ -207,6 +207,9 @@ Route::prefix('admin')->group(function(){
         ->get();
 
         $totalContestant= DB::table('contestantDetails')->get();
+        $totalVote= DB::table('contestantDetails')->get();
+        $totalPayment= DB::table('voterPayments')->get();
+        
 
         return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });

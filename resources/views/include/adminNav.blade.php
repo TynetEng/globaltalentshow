@@ -67,7 +67,7 @@
                                     <i class="fa fa-bell"></i>
                                 </div>
                                 <div class="exp">
-                                    <span>Notification</span>
+                                    <span>Notifications</span>
                                 </div>
                             </a>
                         </div>
