@@ -14,6 +14,7 @@ use App\Models\ContestantDetail;
 use App\Models\Payment;
 use App\Models\Votepayment;
 use App\Models\Voter;
+use App\Models\Voterpayment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -197,7 +198,6 @@ Route::prefix('admin')->group(function(){
     // DASHBOARD
     Route::get('/dashboard', function(){
         $validateAdmin = auth()->guard('admin')->user()->id;
-
         $a = auth()->guard('admin')->user()->firstName;
         $b = auth()->guard('admin')->user()->lastName;
         $first= substr($a,0,1);
@@ -206,12 +206,14 @@ Route::prefix('admin')->group(function(){
         ->where('id', $validateAdmin)
         ->get();
 
-        $totalContestant= DB::table('contestantDetails')->get();
-        $totalVote= DB::table('contestantDetails')->get();
-        $totalPayment= DB::table('voterPayments')->get();
+        $totalContestant= ContestantDetail::count();
+        $totalVote= Voter::count();
+        $totalVotes= Voterpayment::count();
+        $totalPayment= Voterpayment::sum('amount');
+        $totalAdmin= Admin::count();
         
 
-        return view('admin.dashboard')->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
+        return view('admin.dashboard', compact('totalContestant', 'totalVote','totalAdmin', 'totalVotes','totalPayment'))->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
 
     // CONTESTANT

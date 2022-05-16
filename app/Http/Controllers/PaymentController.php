@@ -44,12 +44,11 @@ class PaymentController extends Controller
         // dd($paymentDetails);   
         $status = $paymentDetails['data']['status'];
         
-        
         try {
             //code...
             if($status=='success'){
                 DB::beginTransaction();
-                $payment= DB::table('voterPayments')->insert([
+                $payment= DB::table('voterpayments')->insert([
                     'contestantName'=> 'dear',
                     'user_id'=>$paymentDetails['data']['metadata']['user_id'],
                     'paidAt'=> $paymentDetails['data']['paid_at'],

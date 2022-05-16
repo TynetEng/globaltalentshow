@@ -34,36 +34,42 @@
             <div class="board1">
                 <div class="row">
                     <div class="col-sm-2 pad1">
-                        <div class="data">
-                            0
-                        </div>
                         <div class="no">
                             Total Contestants
                         </div>
+                        <div class="data">
+                          {{$totalContestant}}
+                      </div>
                     </div>
                     <div class="col-sm-2 pad2">
-                        <div class="data">
-                            0
-                        </div>
-                        <div class="no">
-                            Total votes
-                        </div>
-                    </div>
-                    <div class="col-sm-2 pad3">
-                        <div class="data">
-                            0
-                        </div>
-                        <div class="no">
-                            Highest Votes
-                        </div>
+                      <div class="no">
+                        Total votes
+                      </div>
+                      <div class="data">
+                        {{$totalVotes}}
+                      </div>
+                      <div class="no">
+                        Highest Votes
+                      </div>  
+                      <div class="data">
+                        0
+                      </div>  
                     </div>
                     <div class="col-sm-2 pad4">
-                        <div class="data">
-                            0
-                        </div>
-                        <div class="no">
-                            Total payments receive
-                        </div>
+                      <div class="no">
+                        Total payments receive
+                      </div>
+                      <div class="data">
+                       #{{$totalPayment}}
+                      </div> 
+                    </div>
+                    <div class="col-sm-2 pad3">
+                      <div class="no">
+                        Total Admins
+                      </div>
+                      <div class="data">
+                          {{$totalAdmin}}
+                      </div>
                     </div>
                 </div>
             </div>

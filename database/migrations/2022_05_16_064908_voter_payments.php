@@ -17,6 +17,11 @@ class VoterPayments extends Migration
             $table->id();
             $table->string('contestantName');
             $table->string('modeOfPayment');
+            $table->string('paidAt');
+            $table->string('invoiceId');
+            $table->string('amount');
+            $table->string('voterName');
+            $table->string('customerId');
             $table->bigInteger('user_id');
             $table->rememberToken();
             $table->timestamps();
