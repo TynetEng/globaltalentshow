@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Contestant;
 use App\Models\Contestantdetail;
 use App\Models\Payment;
 use App\Models\Votepayment;
@@ -43,7 +44,11 @@ class PaymentController extends Controller
         $paymentDetails = Paystack::getPaymentData();
         // dd($paymentDetails);   
         $status = $paymentDetails['data']['status'];
-        
+        $contestant= Contestant::get();
+
+        for ($i=0; $i <$show ; $i++) { 
+            # code...
+        }
         try {
             //code...
             if($status=='success'){

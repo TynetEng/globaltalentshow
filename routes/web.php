@@ -206,13 +206,14 @@ Route::prefix('admin')->group(function(){
         ->where('id', $validateAdmin)
         ->get();
 
-        $totalContestant= ContestantDetail::count();
+        $totalContestant= ContestantDetails::count();
         $totalVote= Voter::count();
         $totalVotes= Voterpayment::count();
         $totalPayment= Voterpayment::sum('amount');
         $totalAdmin= Admin::count();
         
 
+        // dd($totalAdmin);
         return view('admin.dashboard', compact('totalContestant', 'totalVote','totalAdmin', 'totalVotes','totalPayment'))->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
 
@@ -237,7 +238,7 @@ Route::prefix('admin')->group(function(){
         $request->validate([
             'contestant_name'=>"required",
             'contestant_information'=>"required",
-            'image'=>"required|mimes:png,jpg,jpeg|max:5048",
+            'image'=>"required|image|mimes:png,jpg,jpeg|max:5048",
             'contestant_email'=>'required|email',
             'code'=>'required|unique:contestantDetails,trackingNumber'
         ]);
@@ -813,3 +814,5 @@ Route::get('auth/google/callback', 'App\Http\Controllers\VoterSocialController@c
 
 // CONTESTANT GOOGLE LOGIN
 Route::get('auth/google/callback', 'App\Http\Controllers\ContestantSocialController@callback');
+
+// $cont = DB::table('contestantDetails')->get();

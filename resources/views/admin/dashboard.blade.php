@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-sm-2 pad4">
                       <div class="no">
-                        Total payments receive
+                        Total payments received
                       </div>
                       <div class="data">
                        #{{$totalPayment}}
@@ -80,7 +80,7 @@
                         <div class="title d-flex flex-wrap justify-content-between">
                             <div class="left">
                                 <h6 class="text-medium mb-10">Yearly subscription</h6>
-                                <h3 class="text-bold">$245,479</h3>
+                                <h3 class="text-bold">${{$totalPayment}}</h3>
                             </div>
                             <div class="right">
                                 <div class="select-style-1">

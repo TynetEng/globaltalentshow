@@ -116,9 +116,6 @@
         img{
             width: 70%;   
         }
-        .toggle{
-
-        }
         .cont{
             display: flex;
             justify-content: center;
