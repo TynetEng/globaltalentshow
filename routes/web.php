@@ -209,10 +209,10 @@ Route::prefix('admin')->group(function(){
       
 
         $totalContestant= DB::table('contestantDetails')->count();
-        $totalVote= Voter::count();
-        $totalVotes= Voterpayment::count();
-        $totalPayment= Voterpayment::sum('amount');
-        $totalAdmin= Admin::count();
+        $totalVote= DB::table('voters')->count();
+        $totalVotes= DB::table('voters')->count();
+        $totalPayment= DB::table('voterPayments')->sum('amount');
+        $totalAdmin= DB::table('admins')->count();
         
 
         // dd($totalAdmin);
