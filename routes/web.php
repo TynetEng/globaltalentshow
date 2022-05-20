@@ -211,7 +211,7 @@ Route::prefix('admin')->group(function(){
         $totalContestant= DB::table('contestantDetails')->count();
         $totalVote= DB::table('voters')->count();
         $totalVotes= DB::table('voters')->count();
-        $totalPayment= DB::table('voterPayments')->sum('amount');
+        $totalPayment= DB::table('voterPayments')->sum();
         $totalAdmin= DB::table('admins')->count();
         
 
