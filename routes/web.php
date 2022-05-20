@@ -206,7 +206,9 @@ Route::prefix('admin')->group(function(){
         ->where('id', $validateAdmin)
         ->get();
 
-        $totalContestant= Contestantdetail::count();
+      
+
+        $totalContestant= DB::table('contestantdetails')->count();
         $totalVote= Voter::count();
         $totalVotes= Voterpayment::count();
         $totalPayment= Voterpayment::sum('amount');
