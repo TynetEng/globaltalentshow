@@ -85,7 +85,7 @@
 
                             
                             <div class="paystack">
-                                <form action="" method="post" id="paymentForm">
+                                <form action="{{route('pay')}}" method="post" id="paymentForm">
                                     @if(\Session::has('error'))
                                         <div class="alert alert-danger">{{ \Session::get('error') }}</div>
                                         {{ \Session::forget('error') }}
@@ -95,13 +95,6 @@
                                         {{ \Session::forget('success') }}
                                     @endif
 
-                                    <input type="hidden" name="email" value="{{$voter['email']}}"> {{-- required --}}
-                                    <input type="hidden" name="amount" value="20000"> {{-- required in kobo --}}
-                                    <input type="hidden" name="quantity" value="1">
-                                    <input type="hidden" name="currency" value="NGN">
-                                    <input type="hidden" name="metadata" value="{{ json_encode($array = ['voter_name' => $voter['firstName'] . $voter['lastName'], 'user_id'=>$voter['id'] ]) }}" >
-                                
-                                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                                     
                                     <div class="take">
                                         <button class="btn btn-primary" type="submit">Pay #2000 for vote with Paystack</button>
