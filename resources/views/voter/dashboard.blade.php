@@ -101,7 +101,6 @@
                                     <input type="hidden" name="currency" value="NGN">
                                     <input type="hidden" name="metadata" value="{{ json_encode($array = ['voter_name' => $voter['firstName'] . $voter['lastName'], 'user_id'=>$voter['id'] ]) }}" >
                                 
-                                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                                     
                                     <div class="take">
                                         <button class="btn btn-primary" type="submit">Pay #2000 for vote with Paystack</button>
