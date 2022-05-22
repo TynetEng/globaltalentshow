@@ -570,7 +570,7 @@ Route::prefix('voter')->group(function(){
 
         try {
             DB::beginTransaction();
-            $payment= Votepayment::create([
+            $payment= Voterpayment::create([
                 'contestantName'=> $request->contestant,
                 'user_id'=> $validateVoter,
                 'modeOfPayment'=>'',
