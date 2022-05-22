@@ -163,6 +163,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
+
+
         
         /*
          * Package Service Providers...
@@ -176,9 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Unicodeveloper\Paystack\PaystackServiceProvider::class,
-
-
+        
     ],
 
     /*

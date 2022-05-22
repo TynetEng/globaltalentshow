@@ -46,9 +46,9 @@ class PaymentController extends Controller
         $status = $paymentDetails['data']['status'];
         $contestant= Contestant::get();
 
-        for ($i=0; $i <$show ; $i++) { 
-            # code...
-        }
+        // for ($i=0; $i <$show ; $i++) { 
+        //     # code...
+        // }
         try {
             //code...
             if($status=='success'){
