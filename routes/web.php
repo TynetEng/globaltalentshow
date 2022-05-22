@@ -450,6 +450,8 @@ Route::prefix('voter')->group(function(){
     });
 
     Route::post('/login', function (Request $request) {
+
+        dd("hello");
         $request->validate([
             'email'=>"required|email",
             'password'=>"required"
