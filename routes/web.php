@@ -450,8 +450,6 @@ Route::prefix('voter')->group(function(){
     });
 
     Route::post('/login', function (Request $request) {
-
-        dd("hello");
         $request->validate([
             'email'=>"required|email",
             'password'=>"required"
@@ -465,6 +463,7 @@ Route::prefix('voter')->group(function(){
                 session()->flash('error', 'Invalid Login Details');
                 return redirect()->back();
             }
+            dd("hello");
             return redirect()->to('voter/dashboard');
          
         } catch (\Throwable $th) {
