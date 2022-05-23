@@ -23,6 +23,7 @@ class VoterPayments extends Migration
             $table->string('voterName');
             $table->string('customerId');
             $table->bigInteger('user_id');
+            $table->bigInteger('contestant_id');
             $table->rememberToken();
             $table->timestamps();
            
