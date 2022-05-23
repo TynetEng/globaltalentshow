@@ -42,7 +42,7 @@ class PaymentController extends Controller
 
         // $payment = Votepayment::where()
         $paymentDetails = Paystack::getPaymentData();
-        dd($paymentDetails);   
+        // dd($paymentDetails);   
         $status = $paymentDetails['data']['status'];
         $contestant= Contestant::get();
 
@@ -56,7 +56,7 @@ class PaymentController extends Controller
                 $a= $paymentDetails['data']['amount']/100;
                 $payment= DB::table('voterPayments')->insert([
                     'contestantName'=> 'dear',
-                    'user_id'=>$paymentDetails['data']['metadata']['user_id'],
+                    'user_id'=>$paymentDetails['data']['metadata']['contestantId'],
                     'paidAt'=> $paymentDetails['data']['paid_at'],
                     'invoiceId'=> 'hi',
                     'amount'=>$a,
@@ -65,6 +65,7 @@ class PaymentController extends Controller
                     'modeOfPayment'=>'Paystack',
                     'created_at' =>now(),
                 ]);
+                dd($payment);
                 DB::commit();
             }    
                 return redirect('voter/dashboard')->with('success', 'Successfully vote payment for contestant!');
