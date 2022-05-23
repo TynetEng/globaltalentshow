@@ -60,7 +60,7 @@
                         Total payments received
                       </div>
                       <div class="data">
-                       #{{$totalPayment}}
+                       ${{$totalPayment}}
                       </div> 
                     </div>
                     <div class="col-sm-2 pad3">

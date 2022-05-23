@@ -211,10 +211,10 @@ Route::prefix('admin')->group(function(){
         $totalContestant= DB::table('contestantDetails')->count();
         $totalVote= DB::table('voters')->count();
         $totalVotes= DB::table('voters')->count();
-        $totalPayment= DB::table('voterPayments')->get()->sum("amount");
+        $totalPaymentNaira= DB::table('voterPayments')->get()->sum("amount");
         $totalAdmin= DB::table('admins')->count();
-        $totalPaymentDollar= $totalPayment/560;
-        dd($totalPaymentDollar);
+        $totalPayment= $totalPaymentNaira/560;
+        
 
         // dd($totalAdmin);
         return view('admin.dashboard', compact('totalContestant', 'totalVote','totalAdmin', 'totalVotes','totalPayment'))->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
