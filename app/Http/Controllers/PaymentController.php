@@ -53,6 +53,8 @@ class PaymentController extends Controller
             //code...
             if($status=='success'){
                 DB::beginTransaction();
+                $a= $paymentDetails['data']['amount']/2;
+                dd($a);
                 $payment= DB::table('voterPayments')->insert([
                     'contestantName'=> 'dear',
                     'user_id'=>$paymentDetails['data']['metadata']['user_id'],
@@ -66,7 +68,7 @@ class PaymentController extends Controller
                 ]);
                 DB::commit();
             }    
-                return redirect('voter/dashboard')->with('success', 'Successfully vote payment for contestants!');
+                return redirect('voter/dashboard')->with('success', 'Successfully vote payment for contestant!');
         } catch (\Throwable $th) {
             //throw $th;
             echo "error";
