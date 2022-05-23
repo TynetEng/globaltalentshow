@@ -53,7 +53,7 @@ class PaymentController extends Controller
             //code...
             if($status=='success'){
                 DB::beginTransaction();
-                $payment= DB::table('voterpayments')->insert([
+                $payment= DB::table('voterPayments')->insert([
                     'contestantName'=> 'dear',
                     'user_id'=>$paymentDetails['data']['metadata']['user_id'],
                     'paidAt'=> $paymentDetails['data']['paid_at'],
