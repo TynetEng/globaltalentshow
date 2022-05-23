@@ -50,7 +50,7 @@ class PaymentController extends Controller
         //     # code...
         // }
         for ($f=0; $f < $details; $f++) { 
-            $item = $details[$f]['id'];
+            $details[$f]['id'];
         }
         try {
             //code...
@@ -61,7 +61,7 @@ class PaymentController extends Controller
                 $payment= DB::table('voterPayments')->insert([
                     'contestantName'=> 'dear',
                     'user_id'=>$paymentDetails['data']['metadata']['user_id'],
-                    'contestant_id'=>$item,
+                    'contestant_id'=>$details[$f]['id'],
                     'paidAt'=> $paymentDetails['data']['paid_at'],
                     'invoiceId'=> 'hi',
                     'amount'=>$a,
