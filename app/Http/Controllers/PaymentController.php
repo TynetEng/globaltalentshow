@@ -50,7 +50,7 @@ class PaymentController extends Controller
         //     # code...
         // }
         for ($f=0; $f < $details; $f++) { 
-            dd($details[$f]);
+            dd($details[$f][$f]);
         }
         try {
             //code...
