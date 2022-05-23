@@ -559,9 +559,9 @@ Route::prefix('voter')->group(function(){
     })->name('voterLogout');
 
     // DASHBORAD
-    Route::get('/dashboard', function($id){
+    Route::get('/dashboard', function(){
         $cont = DB::table('contestantDetails')->get();
-        $contestantId = DB::table('contestantDetails')->where('id', $id)->first();
+        $contestantId = DB::table('contestantDetails')->get('id');
         $voter = auth()->guard('voter')->user();
         return view('voter.dashboard')->with(['show'=>$cont, 'voter'=>$voter, 'contId'=>$contestantId]);
     });
