@@ -49,8 +49,8 @@ class PaymentController extends Controller
         // for ($i=0; $i <$show ; $i++) { 
         //     # code...
         // }
-        for ($f=0; $f < $details; $f++) { 
-            dd($details[$f]->id);
+        for ($f=0; $f < $paymentDetails; $f++) { 
+            dd($f['data']['metadata']['contestantId']['id']);
         }
         try {
             //code...
