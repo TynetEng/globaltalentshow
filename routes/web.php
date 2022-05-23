@@ -561,7 +561,7 @@ Route::prefix('voter')->group(function(){
     // DASHBORAD
     Route::get('/dashboard', function(){
         $cont = DB::table('contestantDetails')->get();
-        $contestantId = DB::table('contestantDetails')->get('id');
+        $contestantId = DB::table('contestantDetails')->get()->id;
         $voter = auth()->guard('voter')->user();
         return view('voter.dashboard')->with(['show'=>$cont, 'voter'=>$voter, 'contId'=>$contestantId]);
     });
