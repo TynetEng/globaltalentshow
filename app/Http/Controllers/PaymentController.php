@@ -53,7 +53,7 @@ class PaymentController extends Controller
             //code...
             if($status=='success'){
                 DB::beginTransaction();
-                $a= $paymentDetails['data']['amount']/2;
+                $a= $paymentDetails['data']['amount']/100;
                 dd($a);
                 $payment= DB::table('voterPayments')->insert([
                     'contestantName'=> 'dear',
