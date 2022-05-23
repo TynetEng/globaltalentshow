@@ -66,7 +66,6 @@ class PaymentController extends Controller
                 ]);
                 DB::commit();
             }    
-                echo "success";
                 return redirect('voter/dashboard')->with('success', 'Successfully vote payment for contestants!');
         } catch (\Throwable $th) {
             //throw $th;
