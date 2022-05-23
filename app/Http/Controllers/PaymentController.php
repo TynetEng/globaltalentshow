@@ -45,7 +45,7 @@ class PaymentController extends Controller
         // dd($paymentDetails);   
         $status = $paymentDetails['data']['status'];
         $contestant= Contestant::get();
-        dd($paymentDetails['data']['metadata']['contestantId'][['id']]);
+        dd($paymentDetails['data']['metadata']['contestantId']['id']);
         // for ($i=0; $i <$show ; $i++) { 
         //     # code...
         // }
