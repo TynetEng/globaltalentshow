@@ -42,7 +42,7 @@ class PaymentController extends Controller
 
         // $payment = Votepayment::where()
         $paymentDetails = Paystack::getPaymentData();
-        // dd($paymentDetails);   
+        dd($paymentDetails);   
         $status = $paymentDetails['data']['status'];
         $contestant= Contestant::get();
 
