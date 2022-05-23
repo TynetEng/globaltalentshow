@@ -104,7 +104,7 @@
                                     <input type="hidden" name="amount" value="200000"> {{-- required in kobo --}}
                                     <input type="hidden" name="quantity" value="1">
                                     <input type="hidden" name="currency" value="NGN">
-                                    <input type="hidden" name="message" value="{{$i['id']}}">
+                                    <input type="hidden" name="message" value="{{$show['id']}}">
                                     <input type="hidden" name="metadata" value="{{ json_encode($array = ['voter_name' => $voter['firstName'] . $voter['lastName'], 'user_id'=>$voter['id'], 'contestantId'=>$i['id']]) }}" >
                                 
                                     
