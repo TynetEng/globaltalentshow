@@ -213,7 +213,8 @@ Route::prefix('admin')->group(function(){
         $totalVotes= DB::table('voters')->count();
         $totalPayment= DB::table('voterPayments')->get()->sum("amount");
         $totalAdmin= DB::table('admins')->count();
-        
+        $totalPaymentDollar= $totalPayment/560;
+        dd($totalPaymentDollar);
 
         // dd($totalAdmin);
         return view('admin.dashboard', compact('totalContestant', 'totalVote','totalAdmin', 'totalVotes','totalPayment'))->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
