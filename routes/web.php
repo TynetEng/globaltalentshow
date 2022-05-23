@@ -563,8 +563,7 @@ Route::prefix('voter')->group(function(){
         $cont = DB::table('contestantDetails')->get();
         $contestantId = DB::table('contestantDetails')->get('id');
         $voter = auth()->guard('voter')->user();
-        dd($contestantId);
-        return view('voter.dashboard')->with(['show'=>$cont, 'voter'=>$voter]);
+        return view('voter.dashboard')->with(['show'=>$cont, 'voter'=>$voter, 'contId'=>$contestantId]);
     });
 
     // VOTE PAYMENT WITH PAYPAL
