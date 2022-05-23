@@ -17,6 +17,11 @@
     <div class="container-fluid">
         <div class="container">
             <div class="parent">
+                @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('success')}}
+                    </div>
+                @endif
                 <div class="fillGroup">
                     <div class="fill">
                         @foreach ($show as $i)
