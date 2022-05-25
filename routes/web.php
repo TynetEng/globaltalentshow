@@ -210,6 +210,7 @@ Route::prefix('admin')->group(function(){
 
         $totalContestant= DB::table('contestantDetails')->count();
         $totalVote= DB::table('voters')->count();
+        $totalVoter= DB::table('voterPayments')->count();
         $totalVotes= DB::table('voters')->count();
         $totalPaymentNaira= DB::table('voterPayments')->get()->sum("amount");
         $totalAdmin= DB::table('admins')->count();
@@ -217,7 +218,7 @@ Route::prefix('admin')->group(function(){
         
 
         // dd($totalAdmin);
-        return view('admin.dashboard', compact('totalContestant', 'totalVote','totalAdmin', 'totalVotes','totalPayment'))->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
+        return view('admin.dashboard', compact('totalContestant', 'totalVoter', 'totalVote','totalAdmin', 'totalVotes','totalPayment'))->with(['data'=>$data, 'first'=>$first, 'sec'=>$sec]);
     });
 
     // CONTESTANT

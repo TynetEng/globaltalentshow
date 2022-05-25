@@ -37,9 +37,16 @@
                       <div class="data">
                         {{$totalContestant}}
                       </div>
-                        <div class="no">
-                            Total Contestants
-                        </div>
+                      <div class="no">
+                        Total Contestants
+                      </div>
+
+                      <div class="data">
+                        {{$totalVoter}}
+                      </div>
+                      <div class="no">
+                        Total Voters
+                      </div>
                     </div>
                     <div class="col-sm-2 pad2">
                       <div class="data">
