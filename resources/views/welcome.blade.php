@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="{{asset('image/vote-general.png')}}" alt="" class="imagg">
+                                    <img src="{{asset('image/welcome.png')}}" alt="" class="imagg">
                                 </div>
                             </div>
                             <div class="row hay">
