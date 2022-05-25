@@ -42,7 +42,6 @@ canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container
 }
 .panel{
     animation: animatezoom 0.6s;
-    padding-bottom: 50px;
 }
 @keyframes animatezoom{
     from{
