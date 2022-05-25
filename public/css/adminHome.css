@@ -5,13 +5,14 @@ body {
     padding: 0;
     overflow: hidden;
     font-family: 'Caladea';
+    height: 900px;
 }
 /* ---- reset ---- */ 
 canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container ---- */ 
 #particles-js{ 
     position:absolute; 
     width: 100%; 
-    height: 1000px;
+    height: 900px;
     background-color: black; 
     background-image: url("");
     background-repeat: no-repeat; 
