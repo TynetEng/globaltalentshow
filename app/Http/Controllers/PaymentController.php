@@ -21,10 +21,14 @@ class PaymentController extends Controller
      * Redirect the User to Paystack Payment Page
      * @return Url
      */
-    public function redirectToGateway()
+    public function redirectToGateway($id)
     {
         try{
             return Paystack::getAuthorizationUrl()->redirectNow();
+
+            $data = DB::table('contestantdetails')
+            ->where('id', $id)
+            ->get();
         }catch(\Exception $e) {
             return Redirect::back()->withMessage(['msg'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
         }        
@@ -34,7 +38,7 @@ class PaymentController extends Controller
      * Obtain Paystack payment information
      * @return void
      */
-    public function handleGatewayCallback()
+    public function handleGatewayCallback(Request $id)
     {
         $validateVoter = auth()->guard('voter')->user();
 
@@ -45,13 +49,16 @@ class PaymentController extends Controller
         // dd($paymentDetails);   
         $status = $paymentDetails['data']['status'];
         $contestant= Contestant::get();
-        $details = $paymentDetails['data']['metadata']['contestantId'];
+        // $details = $paymentDetails['data']['metadata']['contestantId'];
         // for ($i=0; $i <$show ; $i++) { 
         //     # code...
         // }
-        for ($f=0; $f < $details; $f++) { 
-            // $details[$f]['id'];
-        }
+        // for ($f=0; $f < $details; $f++) { 
+        //     // $details[$f]['id'];
+        //     sleep(3);
+        // }
+        
+        
         try {
             //code...
             if($status=='success'){
@@ -61,7 +68,7 @@ class PaymentController extends Controller
                 $payment= DB::table('voterPayments')->insert([
                     'contestantName'=> 'dear',
                     'user_id'=>$paymentDetails['data']['metadata']['user_id'],
-                    'contestant_id'=>$details[$f]['id'],
+                    'contestant_id'=>0,
                     'paidAt'=> $paymentDetails['data']['paid_at'],
                     'invoiceId'=> 'hi',
                     'amount'=>$a,

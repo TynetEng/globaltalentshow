@@ -90,7 +90,7 @@
 
                             
                             <div class="paystack">
-                                <form action="{{route('pay')}}" method="post" id="paymentForm">
+                                <form action="{{route('pay', ['id'=>$i->id])}}" method="post" id="paymentForm">
                                     @if(\Session::has('error'))
                                         <div class="alert alert-danger">{{ \Session::get('error') }}</div>
                                         {{ \Session::forget('error') }}

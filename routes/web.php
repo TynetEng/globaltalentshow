@@ -561,8 +561,12 @@ Route::prefix('voter')->group(function(){
     // DASHBORAD
     Route::get('/dashboard', function(){
         $cont = DB::table('contestantDetails')->get();
-        $contestantId = DB::table('contestantDetails')->get('id');
+        $contestantId = DB::table('contestantDetails')->first('id');
         $voter = auth()->guard('voter')->user();
+        
+
+
+        
         return view('voter.dashboard')->with(['show'=>$cont, 'voter'=>$voter, 'contId'=>$contestantId]);
     });
 
@@ -588,7 +592,7 @@ Route::prefix('voter')->group(function(){
     
 
     // VOTE PAYMENT WITH PAYSTACK   
-    Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
+    Route::post('/pay/{id}', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
 });
 
 
