@@ -57,14 +57,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        @media(max-width:760px){
-            #particles-js{ 
-                height: 1000px !important;
-            }
-        }
-    </style>
     
     <script>
         particlesJS("particles-js", 

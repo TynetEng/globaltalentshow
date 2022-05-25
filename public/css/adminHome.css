@@ -83,7 +83,7 @@ h4{
 
 @media(max-width:760px){
     #particles-js{
-        height: 800px;
+        height: 900px;
     }
     .shade{
         width: 100% !important;
