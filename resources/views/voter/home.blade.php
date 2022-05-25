@@ -37,7 +37,7 @@
                                     <img src="{{asset('image/voter.png')}}" alt="" class="imagg">
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="col-sm">
                                 <div class=" card card-body shade">
                                     <h4 class="text-center">Voter</h4>
                                     <p>As a voter, you can vote for any <b>Global Talent contestant</b> of your choice.</p>
