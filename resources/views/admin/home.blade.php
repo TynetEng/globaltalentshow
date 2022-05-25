@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="">
-                                <div class=" card card-body shade">
+                                <div class="col-sm-6 card card-body shade">
                                     <h4 class="text-center">Admin</h4>
                                     <p>As an admin, you must be registered and authorized by the organization <b>Global Talent</b>.</p>
                                     <div class="bot">
