@@ -746,7 +746,7 @@ Route::prefix('contestant')->group(function(){
     // END FORGET PASSWORD --RESET PASSWORD
 
      // CONTESTANT LOGOUT
-     Route::get('/logout', function(Request $request){
+    Route::get('/logout', function(Request $request){
         auth()->guard('contestant')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

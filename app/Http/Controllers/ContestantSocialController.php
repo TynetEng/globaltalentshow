@@ -22,12 +22,9 @@ public function callback()
         
         $user = Socialite::driver('google')->stateless()->user();
         
-        // var_dump(($user->id));
         $findContestant = Contestant::where('google_id', $user->id)->first();
-        // var_dump($findContestant);
 
         $duplicateEmail = Contestant::where('email', $user->email)->first();
-        // dd($duplicateEmail);
 
             if($findContestant){
                 Auth::guard('contestant')->login($findContestant);
@@ -52,7 +49,6 @@ public function callback()
                 return redirect('/contestant/dashboard');
             }
         } catch (Exception $e) {
-            // dd($e->getMessage());
             return "error";
         }
    }

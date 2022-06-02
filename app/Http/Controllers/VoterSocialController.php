@@ -22,20 +22,15 @@ public function callback()
         
         $user = Socialite::driver('google')->stateless()->user();
         
-        // var_dump(($user->id));
         $findVoter = Voter::where('google_id', $user->id)->first();
-        // var_dump($findVoter);
 
         $duplicateEmail = Voter::where('email', $user->email)->first();
-        // dd($duplicateEmail);
 
             if($findVoter){
-                // return "hi";
                 Auth::guard('voter')->login($findVoter);
                 $voter = auth()->guard('voter')->user();
                 return redirect('/voter/dashboard');
             }else{
-                // return "hello";
                 $newUser = Voter::insert([
                     'firstName' => $user->user['given_name'],
                     'lastName' => $user->user['family_name'],
@@ -53,7 +48,6 @@ public function callback()
                 return redirect('/voter/dashboard');
             }
         } catch (Exception $e) {
-            // dd($e->getMessage());
             return "error";
         }
    }

@@ -80,8 +80,10 @@
                 <div class="logg">
                     <button type="submit">Register</button>
                 </div>
-                <div class="cage">
+                <div class="cage d-flex align-items-center justify-content-center">
+                    <div class="draw"></div>
                     <span>OR</span>
+                    <div class="draw2"></div>
                 </div>
                 <div class="google">
                     <a href="{{url('admin/auth/redirect')}}">
@@ -146,8 +148,11 @@
         }
         .cage{
             text-align: center;
-            padding: 10px 0px 10px 0px;
-            
+            padding: 10px 0px 10px 0px;  
+        }
+        .draw, .draw2{
+            width: 22%;
+            border: 1px solid black !important;
         }
         .google{
             text-align: center;

@@ -61,38 +61,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <!-- <div x-data="{show:false}">
-                        <template x-if="show">
-                            <div class="panel">
-                                <div class="inner">
-                                    <form action="{{route('contestant')}}" method="POST">
-                                        <div>
-                                            <label for="">Contestant's Name</label>
-                                            <input type="text" class="form-control" name="contName">
-                                        </div>
-                                        <div class="py-2">
-                                            <label for="">Contestant's Information</label>
-                                            <textarea name="contInfo" cols="43.5" rows="5"></textarea>
-                                        </div>
-                                        <div>
-                                            <div class="image">
-                                                <i class="fa fa-avatar"></i>
-                                                <img src="" alt="">
-                                            </div>
-                                            <input type="file" name="image">
-                                        </div>
-                                        <div class="ref">
-                                            <button class="reg" type="submit">REGISTER VOTER</button>
-                                        </div>
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-                        </template>
-                        <div>
-                            <button class="addVote" x-on:click="show=true">+</button>
-                        </div>
-                    </div> -->
+                    
                     <div>
                         <div class="panel">
                             <div>
@@ -107,7 +76,13 @@
                                                 <span aria-hidden="true">×</span>
                                             </button>
                                         </div>
-                                    @endif  
+                                    @endif
+                                    
+                                    @if (session('success'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{session('success')}}
+                                        </div>
+                                    @endif
                                     <div class="form-group">
                                         <label for="">Contestant's Name</label>
                                         <input type="text" class="form-control @error('contestant_name') is-inavlid @enderror" name="contestant_name"   value="{{old('contestant_name')}}">
