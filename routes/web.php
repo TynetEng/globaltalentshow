@@ -605,7 +605,7 @@ Route::prefix('contestant')->group(function(){
     });
 
      // GOOGLE SOCIALITE
-    Route::get('/auth/redirect', 'App\Http\Controllers\ContestantSocialController@redirect');
+    // Route::get('/auth/redirect', 'App\Http\Controllers\ContestantSocialController@redirect');
     
     // CONTESTANT SIGNUP
     Route::get('/signup', function () {
@@ -819,9 +819,8 @@ Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallbac
 Route::get('auth/google/callback', 'App\Http\Controllers\AdminSocialController@callback');
 
 // VOTER GOOGLE LOGIN
-Route::get('auth/google/callback', 'App\Http\Controllers\VoterSocialController@callback');
+// Route::get('auth/google/callback', 'App\Http\Controllers\VoterSocialController@callback');
 
 // CONTESTANT GOOGLE LOGIN
-Route::get('auth/google/callback', 'App\Http\Controllers\ContestantSocialController@callback');
+// Route::get('auth/google/callback', 'App\Http\Controllers\ContestantSocialController@callback');
 
-// $cont = DB::table('contestantDetails')->get();
