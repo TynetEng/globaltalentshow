@@ -19,7 +19,7 @@ class AdminSocialController extends Controller
 public function callback()
 {
     try {
-        
+        dd("heelo");
         $user = Socialite::driver('google')->stateless()->user();
         
         
