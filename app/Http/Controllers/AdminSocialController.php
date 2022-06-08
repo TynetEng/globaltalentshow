@@ -20,7 +20,7 @@ public function callback()
 {
     try {
         
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
         
         
         $findAdmin = Admin::where('google_id', $user->id)->first();

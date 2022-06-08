@@ -110,7 +110,7 @@ Route::prefix('admin')->group(function(){
     })->name('adminLogin');
 
     // GOOGLE SOCIALITE
-    Route::get('/auth/redirect', 'App\Http\Controllers\AdminSocialController@redirect');
+    // Route::get('/auth/redirect', 'App\Http\Controllers\AdminSocialController@redirect');
    
     // FORGET PASSWORD --RESET PASSWORD
     Route::get('/password/request', function(){
@@ -816,6 +816,7 @@ Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])
 Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('payment');
 
 // ADMIN GOOGLE LOGIN
+Route::get('/auth/redirect', 'App\Http\Controllers\AdminSocialController@redirect');
 Route::get('auth/google/callback', 'App\Http\Controllers\AdminSocialController@callback');
 
 // VOTER GOOGLE LOGIN

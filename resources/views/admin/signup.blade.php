@@ -86,7 +86,7 @@
                     <div class="draw2"></div>
                 </div>
                 <div class="google">
-                    <a href="{{url('admin/auth/redirect')}}">
+                    <a href="{{url('auth/redirect')}}">
                         <span><i class="fa fa-google"></i></span>
                         <span>Continue with Google</span>
                     </a>
