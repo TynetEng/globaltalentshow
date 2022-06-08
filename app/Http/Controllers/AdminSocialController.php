@@ -19,8 +19,8 @@ class AdminSocialController extends Controller
 public function callback()
 {
     try {
-        dd("heelo");
-        $user = Socialite::driver('google')->stateless()->user();
+        
+        $user = Socialite::driver('google')->user();
         
         
         $findAdmin = Admin::where('google_id', $user->id)->first();
