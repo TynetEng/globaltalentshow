@@ -36,7 +36,7 @@ public function callback()
                 return redirect('/admin/dashboard');
             }
             elseif($duplicateEmail){
-                Auth::guard('admin')->login($findAdmin);
+                Auth::guard('admin')->loginUsingId($findAdmin);
                 $admin = auth()->guard('admin')->user();
                 return redirect('/admin/dashboard');
             }else{
