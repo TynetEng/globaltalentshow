@@ -95,7 +95,7 @@
 
             
             <div class="pat1">
-                <p>Already a user? <span><a href="./login" class="text-decoration-none">Login</a></span></p>
+                <p>Already a user? <span><a href="./login" class="text-decoration-none pat3">Login</a></span></p>
             </div>
 
             <div class="pat2">
@@ -145,6 +145,9 @@
             border-radius: 5px;
             padding: 2px 10px;
             font-weight: bold;
+        }
+        .pat3{
+            color: rgb(154, 3, 30);
         }
         .cage{
             text-align: center;
