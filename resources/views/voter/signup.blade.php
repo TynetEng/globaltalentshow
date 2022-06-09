@@ -95,7 +95,7 @@
 
             
             <div class="pat1">
-                <p><span>Already have an account? </span> <span><a href="./login" class="text-decoration-none">Login</a></span></p>
+                <p><span>Already have an account? </span> <span><a href="./login" class="text-decoration-none pat3">Login</a></span></p>
             </div>
 
             <div class="pat2">
@@ -175,7 +175,10 @@
             font-size: 12px;
         }
         .pat3{
-            color:blue;
+            color:rgb(154, 3, 30);
+        }
+        .pat3:hover{
+            color:rgb(77, 14, 26);
         }
         label{
             font-weight: bold;

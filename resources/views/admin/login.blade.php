@@ -74,7 +74,7 @@
                         <label for="remember" class="rmb">Remember me</label for="remember">
                     </div>
                     <div>
-                        <a href="{{route('adminRequest')}}" class="text-decoration-none">Forgot password?</a>
+                        <a href="{{route('adminRequest')}}" class="text-decoration-none pat">Forgot password?</a>
                     </div>
                 </div>
                 @csrf
@@ -83,7 +83,7 @@
                 </div>
             </form>
             <footer class="text-center">
-                <p>Not registered yet? <span><a href="./signup" class="text-decoration-none">Create an account</a></span></p>
+                <p>Not registered yet? <span><a href="./signup" class="text-decoration-none pat">Create an account</a></span></p>
             </footer>
         </div>
         
@@ -133,6 +133,12 @@
         }
         label{
             font-weight: bold;
+        }
+        .pat{
+            color:rgb(154, 3, 30);
+        }
+        .pat:hover{
+            color:rgb(77, 14, 26);
         }
         .rmb{
             font-weight: 400
