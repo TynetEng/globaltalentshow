@@ -146,9 +146,6 @@
             padding: 2px 10px;
             font-weight: bold;
         }
-        .pat3{
-            color: rgb(154, 3, 30);
-        }
         .cage{
             text-align: center;
             padding: 10px 0px 10px 0px;  
@@ -178,7 +175,7 @@
             font-size: 12px;
         }
         .pat3{
-            color:blue;
+            color:rgb(154, 3, 30);
         }
         label{
             font-weight: bold;
