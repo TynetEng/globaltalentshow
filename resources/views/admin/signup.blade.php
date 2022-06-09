@@ -177,6 +177,9 @@
         .pat3{
             color:rgb(154, 3, 30);
         }
+        .pat3:hover{
+            color:rgb(154, 3, 30);
+        }
         label{
             font-weight: bold;
         }
