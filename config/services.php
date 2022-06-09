@@ -30,8 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'google' => [
-        'client_id' => '874572811698-bpfsmp0m2j46qmpkh0bcd5l0ccbgdh3v.apps.googleusercontent.com',
-        'client_secret' => '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',
+        'client_id' => '874572811698-ld4ubn4vrb98qt3hictpe764fnio5aug.apps.googleusercontent.com',
+        'client_secret' => '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',
         'redirect' => 'https://globaltalentshow.herokuapp.com/auth/google/callback',
     ],
 
