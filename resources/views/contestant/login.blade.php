@@ -153,9 +153,6 @@
         .pat:hover{
             color:rgb(77, 14, 26);
         }
-        input[type="checkbox" i]{
-            background-color: rgb(154, 3, 30) !important;
-        }
 
         footer{
             text-align: center;
