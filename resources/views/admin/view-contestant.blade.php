@@ -14,7 +14,7 @@
     <!-- <script src="//unpkg.com/alpinejs" defer></script> -->
 
     <link rel="stylesheet" href="{{url('/css/contestants.css')}}">
-    <title>Document</title>
+    <title>View Contestant</title>
 </head>
 <body>
     <div>

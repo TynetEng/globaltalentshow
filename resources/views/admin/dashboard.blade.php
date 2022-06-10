@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{url('/css/fullcalendar.css')}}">
     <link rel="stylesheet" href="{{url('/css/fullcalendar.css')}}">
     <link rel="stylesheet" href="{{url('/css/main.css')}}">
-    <title>Document</title>
+    <title>Admin Dashboard</title>
 </head>
 <body>
     <div>
