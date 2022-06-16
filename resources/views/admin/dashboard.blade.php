@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-sm-2 pad4">
                       <div class="data">
-                        ${{$totalPayment}}
+                        ${{round($totalPayment,2)}}
                        </div> 
                       <div class="no">
                         Total payments received
