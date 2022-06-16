@@ -87,7 +87,7 @@
                         <div class="title d-flex flex-wrap justify-content-between">
                             <div class="left">
                                 <h6 class="text-medium mb-10">Yearly subscription</h6>
-                                <h3 class="text-bold">${{$totalPayment}}</h3>
+                                <h3 class="text-bold">${{round($totalPayment,2)}}</h3>
                             </div>
                             <div class="right">
                                 <div class="select-style-1">
