@@ -21,22 +21,21 @@ public function callback()
     try {
         
         $user = Socialite::driver('google')->stateless()->user();
-        
+        dd($user);
+        $admin= Admin::where('email', $user->email)->first();
         
         $findAdmin = Admin::where('google_id', $user->id)->first();
-        // var_dump($findAdmin);
+    
 
         $duplicateEmail = Admin::where('email', $user->email)->first();
-        
 
             if($findAdmin){
-                // return "hi";
                 Auth::guard('admin')->login($findAdmin);
                 $admin = auth()->guard('admin')->user();
                 return redirect('/admin/dashboard');
             }
             elseif($duplicateEmail){
-                Auth::guard('admin')->login($findAdmin);
+                Auth::guard('admin')->loginUsingId($admin->id);
                 $admin = auth()->guard('admin')->user();
                 return redirect('/admin/dashboard');
             }else{
@@ -52,12 +51,11 @@ public function callback()
                     'created_at'=>now()
                 ]);
                 
-                Auth::guard('admin')->login($newUser);
+                Auth::guard('admin')->loginUsingId($newUser->id);
                 $admin = auth()->guard('admin')->user();
                 return redirect('/admin/dashboard');
             }
         } catch (Exception $e) {
-            // dd($e->getMessage());
             return "error";
         }
    }

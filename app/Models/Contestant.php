@@ -11,7 +11,7 @@ class Contestant extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
-    protected $guard = 'contestant';
+    protected $guard = 'contestant'
 
     protected $fillable = [
         'firstName',

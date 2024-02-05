@@ -30,9 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'google' => [
-        'client_id' => '874572811698-ld4ubn4vrb98qt3hictpe764fnio5aug.apps.googleusercontent.com',
-        'client_secret' => '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',
-        'redirect' => 'https://globaltalentshow.herokuapp.com/auth/google/callback',
+        'client_id' => '874572811698-qvmjgnaom3p3srqu40bbfecvrgufeb1f.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'https://globaltalentshow.oluwatoyin-agbesua-portfolio.com.ng/auth/google/callback',
     ],
 
 ];

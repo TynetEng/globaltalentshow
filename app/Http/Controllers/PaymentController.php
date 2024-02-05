@@ -65,7 +65,7 @@ class PaymentController extends Controller
                 DB::beginTransaction();
                 $a= $paymentDetails['data']['amount']/100;
                 
-                $payment= DB::table('voterPayments')->insert([
+                $payment= DB::table('voterpayments')->insert([
                     'contestantName'=> 'dear',
                     'user_id'=>$paymentDetails['data']['metadata']['user_id'],
                     'contestant_id'=>0,

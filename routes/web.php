@@ -36,6 +36,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// To run migration
+Route::get('/run-migration', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('migrate:refresh --seed');
+    return "migration executed successfully";
+});
+
+
 // ADMIN
 Route::prefix('admin')->group(function(){
 
@@ -208,11 +216,11 @@ Route::prefix('admin')->group(function(){
 
       
 
-        $totalContestant= DB::table('contestantDetails')->count();
+        $totalContestant= DB::table('contestantdetails')->count();
         $totalVote= DB::table('voters')->count();
-        $totalVoter= DB::table('voterPayments')->count();
+        $totalVoter= DB::table('voterpayments')->count();
         $totalVotes= DB::table('voters')->count();
-        $totalPaymentNaira= DB::table('voterPayments')->get()->sum("amount");
+        $totalPaymentNaira= DB::table('voterpayments')->get()->sum("amount");
         $totalAdmin= DB::table('admins')->count();
         $totalPayment= $totalPaymentNaira/560;
         
@@ -223,7 +231,7 @@ Route::prefix('admin')->group(function(){
 
     // CONTESTANT
     Route::get('/contestant', function(){
-        $cont = DB::table('contestantDetails')->get();
+        $cont = DB::table('contestantdetails')->get();
         
         $validateAdmin = auth()->guard('admin')->user()->id;
 
@@ -244,7 +252,7 @@ Route::prefix('admin')->group(function(){
             'contestant_information'=>"required",
             'image'=>"required|image|mimes:png,jpg,jpeg|max:5048",
             'contestant_email'=>'required|email',
-            'code'=>'required|unique:contestantDetails,trackingNumber'
+            'code'=>'required|unique:contestantdetails,trackingNumber'
         ]);
        
         try {
@@ -257,7 +265,7 @@ Route::prefix('admin')->group(function(){
                 $show= $request->image->move(public_path('images'), $path);
 
                 
-                $details= DB::table('contestantDetails')->insert([
+                $details= DB::table('contestantdetails')->insert([
                     'name'=>$request->contestant_name,
                     'information'=>$request->contestant_information,
                     'image'=>$path,
@@ -292,7 +300,7 @@ Route::prefix('admin')->group(function(){
                 ->get();
 
         try {
-            $check= DB::table('contestantDetails')->where('id', $id)->first();
+            $check= DB::table('contestantdetails')->where('id', $id)->first();
 
         
             // RETURN VIEW
@@ -357,7 +365,7 @@ Route::prefix('admin')->group(function(){
     // DELETE CONTESTANT FORM
     Route::post('delete-contestant/{id}', function(Request $request, $id){
        try {
-            $contestant = DB::table('contestantDetails')
+            $contestant = DB::table('contestantdetails')
             ->where('id',$id)            
             ->delete();
 
@@ -561,8 +569,8 @@ Route::prefix('voter')->group(function(){
 
     // DASHBORAD
     Route::get('/dashboard', function(){
-        $cont = DB::table('contestantDetails')->get();
-        $contestantId = DB::table('contestantDetails')->first('id');
+        $cont = DB::table('contestantdetails')->get();
+        $contestantId = DB::table('contestantdetails')->first('id');
         $voter = auth()->guard('voter')->user();
         
 
